@@ -1,0 +1,19 @@
+
+
+
+
+
+<div class="container">
+    <h2  class="bg-secondary text-white p-2">Answer Given Questions</h2>
+    <br>
+    <div *ngFor="let question of questions" class="mb-4">
+        <h3>{{ question.questionText }}</h3>
+        <select [(ngModel)]="userAnswers[question.questionId]">
+          <option *ngFor="let option of question.options" [value]="option.optionId">
+            {{ option.optionText }}
+          </option>
+        </select>
+        
+      </div>
+      <button class="btn btn-success" (click)="submitAnswers()">Submit</button>
+</div>

@@ -1,0 +1,67 @@
+<p>Kendo-TreeView Crud Operation</p>
+
+<div class="example-config">
+    selected keys: {{selectedKeys.join(",")}}
+  
+  </div>
+  <div class="example-config">
+    Expanded key: {{expandedKeys.join(',')}}
+  </div>
+  <div>
+    <button (click)="addNewNode(null)">Add Root Node</button>
+    <button (click)="addNewNode(selectedNodeId)">Add Child Node</button>
+    <button (click)="deleteSelectedNode()">Delete Selected Node</button>
+  </div>
+
+ 
+<kendo-treeview
+[nodes]="Data"
+textField="name"
+idField="id"
+parentIdField="parentId"
+kendoTreeViewFlatDataBinding
+
+kendoTreeViewExpandable
+[(expandedKeys)]="expandedKeys"
+[expandOnFilter]="filterExpandSettings"
+
+kendoTreeViewDisable
+[expandDisabledNodes]="true"
+[disabledKeys]="disabledKeys"
+
+
+kendoTreeViewSelectable
+[(selectedKeys)]="selectedKeys"
+(selectionChange)="handleSelection($event)"
+
+kendoTreeViewDragAndDrop
+kendoTreeViewDragAndDropEditing
+(nodeDrop)="onNodeDrop($event)"
+
+[filterable]="true"
+filterInputPlaceholder="Try with iph"
+
+
+>
+<ng-template kendoTreeViewNodeTemplate let-dataItem>
+  <span *ngIf="editNodeId !== dataItem.id" (dblclick)="startEditing(dataItem)" >
+    {{dataItem.name}}
+  </span>
+  <input *ngIf="editNodeId==dataItem.id"
+  [(ngModel)]="editNodeName"
+  (blur)="saveNodeName(dataItem)"
+  (keydown.enter)="saveNodeName(dataItem)"
+  (keydown.escape)="cancelEditing()"
+
+
+  />
+
+
+
+</ng-template>
+
+    
+</kendo-treeview>
+<div>
+  <button class="btn btn-success" (click)="treeViewDragDrop()">TreeView Drag And Drop</button>
+</div>

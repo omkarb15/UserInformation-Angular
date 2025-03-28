@@ -1,0 +1,25 @@
+<p>Kendo CheckBox</p>
+<div class="example-config" >
+    cheked keys: {{chekedKeys.join(',')}}
+</div>
+<kendo-treeview
+[nodes]="checkBoxTree"
+textField="name"
+idField="id"
+parentIdField="parentId"
+kendoTreeViewFlatDataBinding
+kendoTreeViewExpandable
+kendoTreeViewCheckable="{ mode: 'multiple' }"
+[(checkedKeys)]="chekedKeys"
+kendoTreeViewLoadMore
+[pageSize]="2"
+[checkBy]="key"
+[size]="selectedComponentSize"
+(checkedChange)="oncheckedChange($event)"
+
+>
+<kendo-treeview-messages loadMore="Display More Items">
+    
+</kendo-treeview-messages>
+</kendo-treeview>
+<!-- [checkedKeys]="chekedKeys" --> 

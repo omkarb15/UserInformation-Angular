@@ -1,0 +1,151 @@
+
+<div class="container">
+    <Div class="text-center m-2 " ><h2 class="bg-primary">User Form</h2></Div>
+      <form Class="row g-3" [formGroup]="userForm" (ngSubmit)="onUserSave(fileInput)">
+        <div class="col-md-3">
+          <label >FirstName <span class="text-danger">*</span></label>
+          <input type="text" formControlName="FirstName" class="form-control">
+          <div class="text-danger">
+            @if (userForm.controls['FirstName'].errors && userForm.controls['FirstName'].touched ) {
+              <span class="text-danger">This is Required</span>
+            }
+          </div>
+        </div>
+    
+        <div class="col-md-3">
+          <label > SurName <span class="text-danger">*</span></label>
+          <input type="text" formControlName="SurName" class="form-control">
+      
+        <div class="text-danger">
+          @if (userForm.controls['SurName'].errors && userForm.controls['SurName'].touched) {
+    
+            <span>This is Required</span>
+          }
+        </div>
+    
+    
+      </div>
+      <div class="col-md-3">
+        <label >Email Id <span class="text-danger">*</span></label>
+        <input type="text" formControlName="EmialId" class="form-control" >
+        <div><span class="text-danger" *ngIf="userForm.controls['EmialId'].errors?.['required']&& userForm.controls['EmialId'].touched">This is required</span></div>
+        <span class="text-danger" *ngIf="userForm.controls['EmialId'].errors?.['pattern']">Please Enter Valid EmailId</span>
+      </div>
+    
+      <div class="col-md-3">
+        <label> UserName <span class="text-danger">*</span></label>
+        <input type="text" formControlName="UserName" class="form-control">
+        <div class="text-dangeer">
+          @if (userForm.controls['UserName'].touched && userForm.controls['UserName'].errors) {
+            <span class="text-danger">This is required</span>
+          }
+        </div>
+      </div>
+     
+      <div class="col-md-3">
+        <label> Password <span class="text-danger">*</span></label>
+        <input type="text" formControlName="PassWord" class="form-control" >
+        <div class="text-dangeer">
+         <span class="text-danger" *ngIf="userForm.controls['PassWord'].errors && userForm.controls['PassWord'].touched">this is Required </span>
+          <span class="text-danger" *ngIf="userForm.controls['PassWord'].errors?.['minlength'] ">Minimum 4 char</span> 
+    
+        </div>
+      </div>  
+    
+      <div class="col-md-3">
+        <label >DOB <span class="text-danger">*</span></label>
+        <input type="date" formControlName="DOB" class="form-control" >
+        <div class="text-danger" *ngIf="userForm.controls['DOB'].errors?.['required'] && userForm.controls['DOB'].touched"> This is required</div>
+      </div>
+    
+      <div class="col-md-3">
+        <div>  <label >Gender<span class="text-danger" >*</span></label></div>
+      <div>  <label class="g-3"   >Male <input type="radio" value="Male" formControlName="Gender" ></label> 
+        <label class="g-3"   > Female <input type="radio" value="Female" formControlName="Gender"></label>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label>Profile Image</label>
+      <input type="file" (change)="onfileSelected($event)" class="form-control" #fileInput>
+    <div *ngIf="userForm.controls['ProfilImage'].value">
+      <p>Current Image:</p>
+      <img [src]="userForm.controls['ProfilImage'].value" width="100" height="100">
+    </div>
+    
+    </div>
+    <div class="col-md-3">
+      <label > select Hobbies</label>
+      <select class="form-select" multiple formControlName="HobbyId">
+        <option *ngFor="let hobby of HobbyList " [value]="hobby.id">
+          {{hobby.hobbyName}}
+        </option>
+      </select>
+    
+    </div>
+
+    <div class="mt-3">
+        <button class="btn btn-success" (click)="OnredirectToLogin()">Redirect To Login Page  </button>
+    </div>
+    
+    
+    
+    
+    <button class="btn btn-success" [disabled]="userForm.invalid" type="submit" > Submit form</button>
+    
+    
+     </form>
+    
+      <table class="table table-bordered mt-3">
+        <thead>
+         <tr>
+          <th>Sr.No.</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>DOB</th>
+          <th>Gender</th>
+          <th>EmailId</th>
+          <th>UserName</th>
+          <th>Password</th>
+          <th>Hobbies</th>
+      <th>ProfileImage</th>
+          <th>Action</th>
+      
+         
+         </tr>
+        </thead>
+         <tbody >
+          <tr *ngFor="let user of userList; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.surName}}</td>
+          <td>{{user.dob}}</td>
+          <td>{{user.gender}}</td>
+          <td>{{user.emialId}}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.passWord}}</td>
+          <td>{{user.hobbyName}} </td>
+          <td><img  *ngIf="user.profilImage" [src]="user.profilImage" width="100" height="100"></td>
+         
+          <td>
+            <button class="btn btn-success m-2 " (click)="editUser(user)"  >Edit</button>
+            <button class="btn btn-danger  " (click)="deleteUser(user.id)" >Delete</button>
+          </td>
+          
+       
+        </tr>
+    
+    
+         </tbody>
+       
+      </table>
+    
+    
+    </div> 
+    
+    
+    
+    
+    
+    
+    
+    

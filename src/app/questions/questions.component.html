@@ -1,0 +1,28 @@
+<div class="container">
+<h2>{{ gender }} Questions</h2>
+  
+<form>
+    <div *ngFor="let question of questions; ">
+        <label>{{ question.questionText }}</label>
+        <div *ngFor="let answer of userAnswers[question.id]; let i = index; trackBy: trackByIndex">
+                <!--index= capture the index of each answer-->
+            <input type="text" [(ngModel)]="userAnswers[question.id][i]" name="{{question.id}}-{{i}}" /> 
+
+            <button class="btn btn-danger btn-sm" (click)="removeanswer(question.id, i)">❌</button>
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-sm" (click)="addanswer(question.id)">Add ➕ </button>
+          
+      
+    </div>
+    <button class="btn btn-success mt-2 " (click)="submitAnswer()" >Submit</button> 
+ 
+</form>
+<!-- 
+<h3>Questions Answered: {{ totalAnswered }}/{{questions.length}}</h3> -->
+
+<button class="btn btn-primary mt-2 " (click)="OnLogin()">Redirect To Login</button>
+
+
+
+</div>
