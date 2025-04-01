@@ -25,6 +25,8 @@ import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ContextMenuModule, MenusModule } from '@progress/kendo-angular-menu';
+import { IconModule, SVGIconModule } from '@progress/kendo-angular-icons';
+import { pencilIcon, plusIcon, trashIcon } from '@progress/kendo-svg-icons';
 interface TreeNode {
   id: number;
   name: string;
@@ -33,11 +35,15 @@ interface TreeNode {
 
 @Component({
   selector: 'app-tree-view-crud',
-  imports: [TreeViewModule,CommonModule,FormsModule,ContextMenuModule, MenusModule],
+  imports: [TreeViewModule,CommonModule,FormsModule,ContextMenuModule, MenusModule,IconModule,SVGIconModule],
   templateUrl: './tree-view-crud.component.html',
   styleUrl: './tree-view-crud.component.css'
 })
 export class TreeViewCrudComponent implements OnInit {
+  public plusIcon=plusIcon
+ public trashIcon=trashIcon
+ public editIcon=pencilIcon
+
 
   Data:TreeNode[]=[]
 
@@ -59,7 +65,9 @@ public expandedKeys:string[]=["0","0_0"]
  }
 
  addNewNode(parentId:number|null){
-  const newNode={name:"new Node",parentId:parentId}
+  const newNodeName= prompt("Write New Node Name","new Node")
+
+  const newNode={name:newNodeName,parentId:parentId}
   this.userService.addNewNode(newNode).subscribe({
     next:()=>
       this.getTreeData()
@@ -141,12 +149,6 @@ selectedNode:any=null
 
 
 editNode(){
-  debugger
-  if (!this.selectedNode) {
-    alert("Please select a node first!");
-    return;
-  }
-
 const newText= prompt("Enter new Node Name:", this.selectedNode.name)
 if(newText){
   this.selectedNode.name=newText
@@ -156,8 +158,8 @@ if(newText){
       console.log("Selected Node is Updated", this.selectedNode.id)
       this.getTreeData()
     }
-  })
-}
+  })  
+}   
 
 
 }
@@ -215,13 +217,7 @@ treeViewCheckBox(){
   this.router.navigate(['/TreeViewCheckBoxes'])
 }
 
-public iconClass(name:any):any{
-  return {
-    "k-i-folder":name !== undefined,
-    "k-icon":true,
-    "k-font-icon":true,
-  }
-}
+
 
 }
 

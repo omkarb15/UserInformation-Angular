@@ -46,10 +46,6 @@ export class ContextMenuComponent {
     const action = event.item.text; // Get the selected action
     console.log('Context Menu Action:', action);
 
-    if (!this.selectedNode) {
-      alert('Please select a node first!');
-      return;
-    }
 
     switch (action) {
       case 'Add Node':

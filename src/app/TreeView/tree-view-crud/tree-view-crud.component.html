@@ -65,12 +65,13 @@
       
   </kendo-treeview>
 
-  <kendo-contextmenu [target]="'kendo-treeview'" 
-  (select)="onContextMenuSelect($event)">
-    <kendo-menu-item text="Add Child Node" iconClass="k-icon  k-i-plus"></kendo-menu-item>
-    <kendo-menu-item text="Delete Node" iconClass="k-i-delete"></kendo-menu-item>
-    <kendo-menu-item text="Add Root Node" iconClass="k-i-plus"></kendo-menu-item>
-    <kendo-menu-item text="Update Node Name" iconClass="k-i-edit"></kendo-menu-item>
+    <kendo-contextmenu [target]="'kendo-treeview'" 
+    (select)="onContextMenuSelect($event)">
+    <kendo-menu-item text="Add Child Node"  [svgIcon]="plusIcon" ></kendo-menu-item>
+    <kendo-menu-item text="Delete Node" [svgIcon]="trashIcon"></kendo-menu-item>
+    <kendo-menu-item text="Add Root Node"  [svgIcon]="plusIcon" ></kendo-menu-item>
+    <kendo-menu-item text="Update Node Name" [svgIcon]="editIcon" ></kendo-menu-item>
+  
   </kendo-contextmenu>
   
 
