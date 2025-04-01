@@ -8,6 +8,7 @@ import { QuestionOptionComponent } from './question-option/question-option.compo
 import { TreeViewCrudComponent } from './TreeView/tree-view-crud/tree-view-crud.component';
 import { TreeDragDropComponent } from './TreeView/tree-drag-drop/tree-drag-drop.component';
 import { CheckBoxesComponent } from './TreeView/check-boxes/check-boxes.component';
+import { ContextMenuComponent } from './TreeView/context-menu/context-menu.component';
 
 export const routes: Routes = [
     { path: '', 
@@ -49,6 +50,10 @@ export const routes: Routes = [
     {
         path:'TreeViewCheckBoxes',
         component:CheckBoxesComponent
+    },
+    {
+        path:'ContextMenu',
+        component:ContextMenuComponent
     }
 ];
 

@@ -24,6 +24,7 @@ import {
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ContextMenuModule, MenusModule } from '@progress/kendo-angular-menu';
 interface TreeNode {
   id: number;
   name: string;
@@ -32,7 +33,7 @@ interface TreeNode {
 
 @Component({
   selector: 'app-tree-view-crud',
-  imports: [TreeViewModule,CommonModule,FormsModule],
+  imports: [TreeViewModule,CommonModule,FormsModule,ContextMenuModule, MenusModule],
   templateUrl: './tree-view-crud.component.html',
   styleUrl: './tree-view-crud.component.css'
 })
@@ -70,6 +71,7 @@ public expandedKeys:string[]=["0","0_0"]
  public handleSelection(event:any){
   if(event && event.dataItem){
     this.selectedNodeId=event.dataItem.id
+    this.selectedNode = event.dataItem;
     this.selectedKeys =[event.index]
     console.log("selected Node Id", this.selectedNodeId)
   }
@@ -131,6 +133,56 @@ deleteSelectedNode(){
                   }
       })
     }
+  }
+
+}
+
+selectedNode:any=null
+
+
+editNode(){
+  debugger
+  if (!this.selectedNode) {
+    alert("Please select a node first!");
+    return;
+  }
+
+const newText= prompt("Enter new Node Name:", this.selectedNode.name)
+if(newText){
+  this.selectedNode.name=newText
+  this.userService.updateNode(this.selectedNode.id,{ name:newText, parentId:this.selectedNode.parentId
+  }).subscribe({
+    next:()=>{
+      console.log("Selected Node is Updated", this.selectedNode.id)
+      this.getTreeData()
+    }
+  })
+}
+
+
+}
+
+
+onContextMenuSelect(event:any){
+  const action=event.item.text
+  console.log("Context Menu Action", action)
+
+ 
+
+  switch(action){
+    case 'Add Child Node':
+      this.addNewNode(this.selectedNodeId)
+      break
+      case 'Add Root Node':
+        this.addNewNode(null)
+        break
+      case 'Delete Node':
+        this.deleteSelectedNode()
+        break
+        case "Update Node Name":
+          this.editNode()
+          break
+
   }
 
 }

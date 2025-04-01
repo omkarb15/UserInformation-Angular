@@ -1,0 +1,22 @@
+<kendo-treeview
+  [nodes]="treeData"
+  kendoTreeViewExpandable
+  kendoTreeViewSelectable
+  [textField]="'text'"
+  (nodeClick)="onNodeClick($event)"
+
+>
+  <ng-template kendoTreeViewNodeTemplate let-dataItem>
+    {{ dataItem.text }}
+  </ng-template>
+</kendo-treeview>
+
+<kendo-contextmenu 
+  [target]="'kendo-treeview'" 
+  (select)="onContextMenuSelect($event)">
+  <kendo-menu-item text="Add Node"></kendo-menu-item>
+  <kendo-menu-item text="Edit Node"></kendo-menu-item>
+  <kendo-menu-item text="Delete Node"></kendo-menu-item>
+</kendo-contextmenu>
+
+

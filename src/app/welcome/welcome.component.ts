@@ -48,4 +48,8 @@ treeViewDragAndDrop(){
 treeViewCheckBox(){
   this.router.navigate(['/TreeViewCheckBoxes'])
 }
+treeViewContextMenu(){
+  this.router.navigate(['/ContextMenu'])
+}
+
 }
