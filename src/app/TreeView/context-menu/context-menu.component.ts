@@ -52,7 +52,7 @@ export class ContextMenuComponent {
         this.addNode();
         break;
       case 'Edit Node':
-        this.editNode();
+        this.editNode();  
         break;
       case 'Delete Node':
         this.deleteNode();

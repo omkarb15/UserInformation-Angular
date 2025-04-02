@@ -19,12 +19,13 @@ import {
   TreeItemDragEvent,
   TreeItemLookup,
   FilterExpandSettings,
+  NodeClickEvent,
   
 } from "@progress/kendo-angular-treeview";
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ContextMenuModule, MenusModule } from '@progress/kendo-angular-menu';
+import { ContextMenuComponent, ContextMenuModule, ContextMenuSelectEvent, MenuEvent, MenusModule } from '@progress/kendo-angular-menu';
 import { IconModule, SVGIconModule } from '@progress/kendo-angular-icons';
 import { pencilIcon, plusIcon, trashIcon } from '@progress/kendo-svg-icons';
 interface TreeNode {
@@ -79,11 +80,12 @@ public expandedKeys:string[]=["0","0_0"]
  public handleSelection(event:any){
   if(event && event.dataItem){
     this.selectedNodeId=event.dataItem.id
-    this.selectedNode = event.dataItem;
+   this.selectedNode=event.dataItem
     this.selectedKeys =[event.index]
-    console.log("selected Node Id", this.selectedNodeId)
+    console.log("selected Node Id", this.selectedNodeId )
   }
  }
+
 
  editNodeId:number|null=null
  editNodeName:string=""
@@ -138,7 +140,7 @@ deleteSelectedNode(){
           console.log(`Node ${this.editNodeName } Deleted Successfully`)
           this.getTreeData()
           this.selectedNodeId=null
-                  }
+                  }             
       })
     }
   }
@@ -146,6 +148,7 @@ deleteSelectedNode(){
 }
 
 selectedNode:any=null
+
 
 
 editNode(){
@@ -163,15 +166,28 @@ if(newText){
 
 
 }
+contextItem:any=null
+public onNodeClick(e: NodeClickEvent, treeMenu: ContextMenuComponent): void {
+  if (e.type === "contextmenu" && e.item && e.item.dataItem) {  // Ensure right-click on a node
+    const originalEvent = e.originalEvent;
+    originalEvent.preventDefault(); // Prevent default browser context menu
+
+    this.contextItem = e.item.dataItem; // Store clicked item
+    this.selectedNodeId = this.contextItem.id; // Store the selected node ID
+
+    treeMenu.show({
+      left: originalEvent.pageX, // Show context menu at mouse position
+      top: originalEvent.pageY,
+    });
+  }
+}
 
 
-onContextMenuSelect(event:any){
+onContextMenuSelect(event:ContextMenuSelectEvent){
   const action=event.item.text
   console.log("Context Menu Action", action)
 
- 
-
-  switch(action){
+  switch(action){   
     case 'Add Child Node':
       this.addNewNode(this.selectedNodeId)
       break

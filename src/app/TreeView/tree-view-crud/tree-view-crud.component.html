@@ -14,7 +14,8 @@
     </div>
 
   
-  <kendo-treeview #target
+  <kendo-treeview style="width: 300px"
+  class="custom-treeview"
   [nodes]="Data"
   textField="name"
   idField="id"
@@ -37,11 +38,12 @@
   kendoTreeViewDragAndDrop
   kendoTreeViewDragAndDropEditing
   (nodeDrop)="onNodeDrop($event)"
+  (nodeClick)="onNodeClick($event, treemenu)"
+
 
   
 
-  [filterable]="true"
-  filterInputPlaceholder="Try with iph"
+
 
 
   >
@@ -53,24 +55,28 @@
     [(ngModel)]="editNodeName"
     (blur)="saveNodeName(dataItem)"
     (keydown.enter)="saveNodeName(dataItem)"
-    (keydown.escape)="cancelEditing()"
-
+    (keydown.escape)="cancelEditing()" 
+    [filterable]="true"
+  filterInputPlaceholder="Try with iph"
+  (selectionChange)="handleSelection($event)"
 
     />
 
 
-
+  [target]="'kendo-treeview'" 
+     [target]="'.custom-treeview'"
   </ng-template> -->
 
       
   </kendo-treeview>
 
-    <kendo-contextmenu [target]="'kendo-treeview'" 
+    <kendo-contextmenu #treemenu
+ 
     (select)="onContextMenuSelect($event)">
-    <kendo-menu-item text="Add Child Node"  [svgIcon]="plusIcon" ></kendo-menu-item>
-    <kendo-menu-item text="Delete Node" [svgIcon]="trashIcon"></kendo-menu-item>
-    <kendo-menu-item text="Add Root Node"  [svgIcon]="plusIcon" ></kendo-menu-item>
-    <kendo-menu-item text="Update Node Name" [svgIcon]="editIcon" ></kendo-menu-item>
+    <kendo-menu-item text="Add Child Node"  [svgIcon]="plusIcon" [cssStyle]="{ backgroundColor: '#d3d3d3' }" ></kendo-menu-item>
+    <kendo-menu-item text="Delete Node" [svgIcon]="trashIcon" [cssStyle]="{ backgroundColor: '#d3d3d3' }"></kendo-menu-item>
+    <kendo-menu-item text="Add Root Node"  [svgIcon]="plusIcon"  [cssStyle]="{ backgroundColor: '#d3d3d3' }"></kendo-menu-item>
+    <kendo-menu-item text="Update Node Name" [svgIcon]="editIcon" [cssStyle]="{ backgroundColor: '#d3d3d3' }" ></kendo-menu-item>
   
   </kendo-contextmenu>
   

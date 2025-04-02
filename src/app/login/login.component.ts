@@ -56,7 +56,11 @@ OnLogin() {
 OnCancel() {
   this.LoginForm.reset(); 
 }
-
+OnLogout() {
+  // Clear local storage and redirect to login
+  localStorage.clear();
+  this.router.navigate(['/Login']);
+}
 
 
 

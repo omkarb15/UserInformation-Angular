@@ -51,6 +51,13 @@ export class TreeDragDropComponent implements OnInit {
       }
     })
   }
+
+  onNodeDragStart(event:any) {
+  if (event.sourceItem.item.dataItem.id === 1 || event.sourceItem.item.dataItem.id === 9) {
+      event.preventDefault()
+    }
+  }
+  
   onNodeDrop(event: TreeItemDropEvent) { 
     debugger;
     console.log("Drag and Drop event", event)
@@ -60,7 +67,7 @@ export class TreeDragDropComponent implements OnInit {
     const dropPosition: DropPosition = event.dropPosition
 
    
-    const newTreeViewId = this.treeData1.includes(NewParent) ? 1 : 2 
+    const newTreeViewId = this.treeData1.includes(NewParent) ? 1 : 2  //if newparent is not include in treedata1 then it will get treeviewID 2
     draggedItem.treeViewId = newTreeViewId;
 
 

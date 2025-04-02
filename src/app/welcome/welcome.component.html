@@ -1,5 +1,9 @@
 <h2>Welcome!</h2>
+<div>
+    <button class="btn btn-danger" (click)="OnLogout()" type="button">Logout</button>
+</div>
 <h2> {{ this.FirstName  }} {{ this.SurName  }}</h2>
+
 <div class="d-flex gap-2">
     <button class="btn btn-success" (click)="OnuserForm()">AddUser</button>
     <button class="btn btn-success" (click)="OnQuestion()">Questions</button>
