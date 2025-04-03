@@ -65,15 +65,6 @@ public expandedKeys:string[]=["0","0_0"]
   })
  }
 
- addNewNode(parentId:number|null){
-  const newNodeName= prompt("Write New Node Name","new Node")
-
-  const newNode={name:newNodeName,parentId:parentId}
-  this.userService.addNewNode(newNode).subscribe({
-    next:()=>
-      this.getTreeData()
-  })
- }
 
  public selectedNodeId:number|null=null
 
@@ -113,22 +104,37 @@ if(!draggedItem){
   })
 }
 
-saveNodeName(node:TreeNode){
+addNewNode(parentId:number|null){
+  if(this.tempNodeName.trim()==="")return
+
+  const newNode={name:this.tempNodeName,parentId:parentId?? null}
+  this.userService.addNewNode(newNode).subscribe({
+    next:()=>{  
+      this.getTreeData()
+      this.isAddingNodeId=null
+      this.tempNodeName=''
+      
+    }   
+  })
+ }
+saveEditedName(node:TreeNode){
   debugger
-if(this.editNodeName.trim()==="") return
-node.name=this.editNodeName
+if(this.tempNodeName.trim()===""|| !node) return
+node.name=this.tempNodeName
 this.userService.updateNode(node.id,{name: node.name,
   parentId:node.parentId
 }).subscribe({
 next:()=>{
     console.log(`Node ${node.id} update successfully.`)
     this.getTreeData()
+    this.isEditingNodeId=null
   } 
 })
 this.editNodeId=null
 }
 cancelEditing(){
-  this.editNodeId=null
+  this.isEditingNodeId=null
+  this.isAddingNodeId=null
 }
 
 deleteSelectedNode(){
@@ -167,13 +173,13 @@ if(newText){
 
 }
 contextItem:any=null
-public onNodeClick(e: NodeClickEvent, treeMenu: ContextMenuComponent): void {
-  if (e.type === "contextmenu" && e.item && e.item.dataItem) {  // Ensure right-click on a node
-    const originalEvent = e.originalEvent;
-    originalEvent.preventDefault(); // Prevent default browser context menu
+public onNodeClick(event: NodeClickEvent, treeMenu: ContextMenuComponent): void {
+  if (event.type === "contextmenu" && event.item && event.item.dataItem) {  // Ensure right-click on a node
+    const originalEvent = event.originalEvent;
+    originalEvent.preventDefault(); 
 
-    this.contextItem = e.item.dataItem; // Store clicked item
-    this.selectedNodeId = this.contextItem.id; // Store the selected node ID
+    this.contextItem = event.item.dataItem; 
+    this.selectedNodeId = this.contextItem.id; 
 
     treeMenu.show({
       left: originalEvent.pageX, // Show context menu at mouse position
@@ -181,6 +187,11 @@ public onNodeClick(e: NodeClickEvent, treeMenu: ContextMenuComponent): void {
     });
   }
 }
+public isEditingNodeId:number| null=null
+public isAddingNodeId:number| null=null
+public tempNodeName:string=""
+
+
 
 
 onContextMenuSelect(event:ContextMenuSelectEvent){
@@ -189,16 +200,26 @@ onContextMenuSelect(event:ContextMenuSelectEvent){
 
   switch(action){   
     case 'Add Child Node':
-      this.addNewNode(this.selectedNodeId)
+      if (this.selectedNodeId !== null) {
+        this.isAddingNodeId = this.selectedNodeId; 
+        this.tempNodeName = ""; 
+      }
+      // this.addNewNode(this.selectedNodeId)
       break
       case 'Add Root Node':
-        this.addNewNode(null)
+        this.isAddingNodeId=-1
+        this.tempNodeName=''
+        // this.addNewNode(null)
         break
       case 'Delete Node':
         this.deleteSelectedNode()
         break
         case "Update Node Name":
-          this.editNode()
+          if(this.selectedNode){
+            this.isEditingNodeId=this.selectedNode.id
+            this.tempNodeName=this.selectedNode.name
+          }
+          // this.editNode()
           break
 
   }

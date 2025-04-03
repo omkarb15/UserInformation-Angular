@@ -9,6 +9,7 @@ import { TreeViewCrudComponent } from './TreeView/tree-view-crud/tree-view-crud.
 import { TreeDragDropComponent } from './TreeView/tree-drag-drop/tree-drag-drop.component';
 import { CheckBoxesComponent } from './TreeView/check-boxes/check-boxes.component';
 import { ContextMenuComponent } from './TreeView/context-menu/context-menu.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     { path: '', 
@@ -25,35 +26,43 @@ export const routes: Routes = [
     },
     {
         path:'UserForm',
-        component:UserFormComponent
+        component:UserFormComponent,
+        canActivate:[authGuard]
     },
     {
         path:'Welcome',
-        component:WelcomeComponent
+        component:WelcomeComponent,
+        canActivate:[authGuard]
     },
     {
         path:'Questions',
-        component:QuestionsComponent
+        component:QuestionsComponent,
+        canActivate:[authGuard]
     },
     {
         path:'QuestionOption',
-        component:QuestionOptionComponent
+        component:QuestionOptionComponent,
+        canActivate:[authGuard]
     },
     {
         path:'TreeViewCrudOperation',
-        component:TreeViewCrudComponent
+        component:TreeViewCrudComponent,
+        canActivate:[authGuard]
     },
     {
         path:'TreeViewDragDrop',
-        component:TreeDragDropComponent
+        component:TreeDragDropComponent,
+        canActivate:[authGuard]
     },
     {
         path:'TreeViewCheckBoxes',
-        component:CheckBoxesComponent
+        component:CheckBoxesComponent,
+        canActivate:[authGuard]
     },
     {
         path:'ContextMenu',
-        component:ContextMenuComponent
+        component:ContextMenuComponent,
+        canActivate:[authGuard]
     }
 ];
 

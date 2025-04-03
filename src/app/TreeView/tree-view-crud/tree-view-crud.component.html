@@ -13,7 +13,15 @@
       <button (click)="deleteSelectedNode()">Delete Selected Node</button>
     </div>
 
-  
+    <div *ngIf="isAddingNodeId === -1">
+      <input 
+        [(ngModel)]="tempNodeName"
+        (blur)="addNewNode(null)"
+        (keydown.enter)="addNewNode(null)"
+        (keydown.escape)="cancelEditing()"
+        placeholder="Enter new root node name"
+      />
+    </div>
   <kendo-treeview style="width: 300px"
   class="custom-treeview"
   [nodes]="Data"
@@ -39,37 +47,47 @@
   kendoTreeViewDragAndDropEditing
   (nodeDrop)="onNodeDrop($event)"
   (nodeClick)="onNodeClick($event, treemenu)"
+  >
+  <ng-template kendoTreeViewNodeTemplate let-dataItem>
 
+<ng-container *ngIf="isEditingNodeId===dataItem.id;else displayNodes ">
+  <input 
+  [(ngModel)]="tempNodeName"
+  (blur)="saveEditedName(dataItem)"
+  (keydown.enter)="saveEditedName(dataItem)"
+  (keydown.escape)="cancelEditing()" />
+
+</ng-container>
+
+<ng-template #displayNodes>
+<span>{{dataItem.name}}</span>
+</ng-template>
+
+<div *ngIf="isAddingNodeId === dataItem.id"  >
+  <input 
+    [(ngModel)]="tempNodeName"
+    (blur)="addNewNode(selectedNodeId)"
+    (keydown.enter)="addNewNode(selectedNodeId)"
+    (keydown.escape)="cancelEditing()"
+    placeholder="Enter new node name"
+  />
+</div>
 
   
+ </ng-template>
+ <!-- <div *ngIf="isAddingNodeId === null">
+  <input
+    [(ngModel)]="tempNodeName"
+    (blur)="addNewNode(null)"
+    (keydown.enter)="addNewNode(null)"  
+    (keydown.escape)="cancelEditing()"
+    placeholder="Enter new root node name"
+  />
+</div> -->
 
-
-
-
-  >
-  <!-- <ng-template kendoTreeViewNodeTemplate let-dataItem>
-    <span *ngIf="editNodeId !== dataItem.id" (dblclick)="startEditing(dataItem)" >
-      {{dataItem.name}}
-    </span>
-    <input *ngIf="editNodeId==dataItem.id"
-    [(ngModel)]="editNodeName"
-    (blur)="saveNodeName(dataItem)"
-    (keydown.enter)="saveNodeName(dataItem)"
-    (keydown.escape)="cancelEditing()" 
-    [filterable]="true"
-  filterInputPlaceholder="Try with iph"
-  (selectionChange)="handleSelection($event)"
-
-    />
-
-
-  [target]="'kendo-treeview'" 
-     [target]="'.custom-treeview'"
-  </ng-template> -->
-
-      
   </kendo-treeview>
-
+  <!-- [target]="'kendo-treeview'" 
+  [target]="'.custom-treeview'" -->
     <kendo-contextmenu #treemenu
  
     (select)="onContextMenuSelect($event)">
@@ -80,8 +98,6 @@
   
   </kendo-contextmenu>
   
-
-
 
 
 

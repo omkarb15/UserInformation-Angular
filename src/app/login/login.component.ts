@@ -23,9 +23,12 @@ export class LoginComponent {
 constructor(private userService: UserService, private router: Router) {}
 
 
-ngOninit(){
+ngOnInit() {
 
+localStorage.clear()
+  sessionStorage.clear();
 }
+
 
 OnLogin() {
   debugger
@@ -56,11 +59,7 @@ OnLogin() {
 OnCancel() {
   this.LoginForm.reset(); 
 }
-OnLogout() {
-  // Clear local storage and redirect to login
-  localStorage.clear();
-  this.router.navigate(['/Login']);
-}
+
 
 
 

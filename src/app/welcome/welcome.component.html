@@ -1,7 +1,5 @@
 <h2>Welcome!</h2>
-<div>
-    <button class="btn btn-danger" (click)="OnLogout()" type="button">Logout</button>
-</div>
+
 <h2> {{ this.FirstName  }} {{ this.SurName  }}</h2>
 
 <div class="d-flex gap-2">
@@ -12,4 +10,7 @@
     <button class="btn btn-success "(click)="treeViewDragAndDrop()">TreeView Drag And Drop Operation</button>
     <button class="btn btn-success" (click)="treeViewCheckBox()">TreeView CheckBox</button>
     <button class="btn btn-success" (click)="treeViewContextMenu()">ContextMenu</button>
+</div>
+<div class="mt-3">
+    <button class="btn btn-danger ms-2" (click)="OnLogout()" type="button">Logout</button>
 </div>
