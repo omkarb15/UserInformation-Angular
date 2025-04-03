@@ -112,7 +112,10 @@ public key="name"
   
 public componentSize:TreeViewSize[]=["small", "medium","large"]
 public selectedComponentSize:TreeViewSize="large"
-  
+OnLogout() {
+  localStorage.clear();
+  this.router.navigate(['/Login']);
+}
   
 
 

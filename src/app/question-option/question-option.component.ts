@@ -80,5 +80,9 @@ getUserans(){
     }
   })
 }
+OnLogout() {
+  localStorage.clear();
+  this.router.navigate(['/Login']);
+}
 
 }

@@ -131,5 +131,8 @@ public getActionText(action:DropAction):string{
   
   }
   } 
-
+  OnLogout() {
+    localStorage.clear();
+    this.router.navigate(['/Login']);
+  }
 }

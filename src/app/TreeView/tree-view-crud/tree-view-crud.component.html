@@ -7,11 +7,11 @@
     <div class="example-config">
       Expanded key: {{expandedKeys.join(',')}}
     </div>
-    <div>
+    <!-- <div>
       <button (click)="addNewNode(null)">Add Root Node</button>
       <button (click)="addNewNode(selectedNodeId)">Add Child Node</button>
       <button (click)="deleteSelectedNode()">Delete Selected Node</button>
-    </div>
+    </div> -->
 
     <div *ngIf="isAddingNodeId === -1">
       <input 
@@ -104,5 +104,6 @@
 
 
   <div>
-    <button class="btn btn-success" (click)="treeViewDragDrop()">TreeView Drag And Drop</button>
+    <button class="btn btn-success ms-2" (click)="treeViewDragDrop()">TreeView Drag And Drop</button>
+    <button class="btn btn-danger ms-2" (click)="OnLogout()">Logout</button>
   </div>

@@ -153,25 +153,26 @@ deleteSelectedNode(){
 
 }
 
+
+
+
+
+// editNode(){
+// const newText= prompt("Enter new Node Name:", this.selectedNode.name)
+// if(newText){
+//   this.selectedNode.name=newText
+//   this.userService.updateNode(this.selectedNode.id,{ name:newText, parentId:this.selectedNode.parentId
+//   }).subscribe({
+//     next:()=>{
+//       console.log("Selected Node is Updated", this.selectedNode.id)
+//       this.getTreeData()
+//     }
+//   })  
+// }   
+
+
+// }
 selectedNode:any=null
-
-
-
-editNode(){
-const newText= prompt("Enter new Node Name:", this.selectedNode.name)
-if(newText){
-  this.selectedNode.name=newText
-  this.userService.updateNode(this.selectedNode.id,{ name:newText, parentId:this.selectedNode.parentId
-  }).subscribe({
-    next:()=>{
-      console.log("Selected Node is Updated", this.selectedNode.id)
-      this.getTreeData()
-    }
-  })  
-}   
-
-
-}
 contextItem:any=null
 public onNodeClick(event: NodeClickEvent, treeMenu: ContextMenuComponent): void {
   if (event.type === "contextmenu" && event.item && event.item.dataItem) {  // Ensure right-click on a node
@@ -252,6 +253,10 @@ treeViewDragDrop(){
 }
 treeViewCheckBox(){
   this.router.navigate(['/TreeViewCheckBoxes'])
+}
+OnLogout() {
+  localStorage.clear();
+  this.router.navigate(['/Login']);
 }
 
 
