@@ -55,6 +55,7 @@ export class TreeDragDropComponent implements OnInit {
   onNodeDragStart(event:any) {
   if (event.sourceItem.item.dataItem.id === 1 || event.sourceItem.item.dataItem.id === 9) {
       event.preventDefault()
+      // event.setValid(false)
     }
   }
   

@@ -10,6 +10,7 @@ import { TreeDragDropComponent } from './TreeView/tree-drag-drop/tree-drag-drop.
 import { CheckBoxesComponent } from './TreeView/check-boxes/check-boxes.component';
 import { ContextMenuComponent } from './TreeView/context-menu/context-menu.component';
 import { authGuard } from './auth.guard';
+import { DataBindingComponent } from '../Kendo-Grid/data-binding/data-binding.component';
 
 export const routes: Routes = [
     { path: '', 
@@ -62,6 +63,11 @@ export const routes: Routes = [
     {
         path:'ContextMenu',
         component:ContextMenuComponent,
+        canActivate:[authGuard]
+    },
+    {
+        path:'KendoGridDataBinding',
+        component:DataBindingComponent,
         canActivate:[authGuard]
     }
 ];

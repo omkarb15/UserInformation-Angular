@@ -117,6 +117,7 @@ addNewNode(parentId:number|null){
     }   
   })
  }
+ 
 saveEditedName(node:TreeNode){
   debugger
 if(this.tempNodeName.trim()===""|| !node) return
@@ -174,6 +175,7 @@ deleteSelectedNode(){
 // }
 selectedNode:any=null
 contextItem:any=null
+
 public onNodeClick(event: NodeClickEvent, treeMenu: ContextMenuComponent): void {
   if (event.type === "contextmenu" && event.item && event.item.dataItem) {  // Ensure right-click on a node
     const originalEvent = event.originalEvent;

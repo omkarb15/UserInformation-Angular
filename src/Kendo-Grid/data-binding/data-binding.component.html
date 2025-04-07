@@ -1,0 +1,135 @@
+UserInformatioin
+
+<kendo-grid
+  [data]="gridview"
+  [pageSize]="state.take"
+  [skip]="state.skip"
+  [pageable]="true"
+  [sortable]="true"
+  [sort]="state.sort"
+
+  [filterable]="true"
+  [filter]="state.filter"
+
+  [groupable]="true"
+  [group]="state.group"
+  (dataStateChange)="dataStateChange($event)"
+
+  
+
+  [height]="500"
+>
+<!-- (sortChange)="onSortChange($event)"
+(filterChange)="onFilterChange($event)"
+(groupChange)="onGroupChange($event)" 
+(pageChange)="onPageChange($event)" -->
+<kendo-grid-column title="Sr. No." [width]="10" >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+      {{ skip + rowIndex + 1 }}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="id" Title="Id In DB" [width]="10" filter="numeric"> 
+    
+  
+  </kendo-grid-column>
+
+  <kendo-grid-column field="firstName" title="First Name" [width]="20">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+          <kendo-grid-string-filter-cell
+            [column]="column"
+            [filter]="filter"
+            operator="startswith"
+          >
+            <kendo-filter-startswith-operator></kendo-filter-startswith-operator>
+            <kendo-filter-eq-operator></kendo-filter-eq-operator>
+          </kendo-grid-string-filter-cell>
+        </ng-template>
+
+  </kendo-grid-column>
+
+  <kendo-grid-column field="surName" title="Surname" [width]="20"></kendo-grid-column>
+
+  <kendo-grid-column field="dob" title="DOB"  filter= "date"   format="MM/dd/yyyy" [width]="20">
+    <ng-template kendoGridCellTemplate let-dataItem >
+        {{ dataItem.dob | date: 'MM/dd/yyyy' }}
+     </ng-template> 
+     <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-grid-date-filter-cell
+        [column]="column"
+        [filter]="filter"
+        operator="eq"
+      >
+      </kendo-grid-date-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-column field="gender" title="Gender" [width]="20" >
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-dropdownlist
+        [data]="genderOptions"
+        textField="text"
+        valueField="value"
+        [defaultItem]="{ text: 'All', value: null }"
+        [(ngModel)]="genderFilterValue"
+        (valueChange)="onGenderFilterChange($event)"
+      >
+      </kendo-dropdownlist>
+    </ng-template>
+  </kendo-grid-column>
+  
+  
+
+  <kendo-grid-column field="emialId" title="EmailId" [width]="20" [filterable]="false" ></kendo-grid-column>
+  <kendo-grid-column field="userName" title="UserName" [width]="20" [filterable]="false"></kendo-grid-column>
+  <kendo-grid-column field="passWord" title="PassWord" [width]="20" [filterable]="false"></kendo-grid-column>
+  <kendo-grid-column title="Profile Image" [width]="20">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <img [src]="dataItem.profilImage" width="60" height="60" style="border-radius: 50%;" alt="Profile Image"/>
+    </ng-template>
+  </kendo-grid-column>
+  
+  
+</kendo-grid>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <!-- <kendo-grid
+    [data]="gridview"
+    [pageSize]="pageSize"
+    [skip]="skip"
+    [pageable]="true"
+    [sortable]="true"
+    [filterable]="true"
+    [groupable]="true"
+    [height]="420"
+    (pageChange)="onPageChange($event)"
+    >
+    <kendo-grid-column field="CompanyName" [width]="140"></kendo-grid-column>
+    <kendo-grid-column field="ContactName" [width]="120"></kendo-grid-column>
+    <kendo-grid-column field="City" [width]="100"></kendo-grid-column>
+    <kendo-grid-column field="ContactTitle" [width]="130"></kendo-grid-column>
+    </kendo-grid> -->
+
+    <!--
+    Buit in DataBindingDirective
+    <kendo-grid
+        [kendoGridBinding]="gridData"
+        [sortable]="true"
+        [filterable]="true"
+        [groupable]="true"
+    >
+        <kendo-grid-column field="CompanyName"></kendo-grid-column>
+        <kendo-grid-column field="ContactName"></kendo-grid-column>
+    </kendo-grid> -->

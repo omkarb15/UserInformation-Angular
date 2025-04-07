@@ -51,6 +51,10 @@ treeViewCheckBox(){
 treeViewContextMenu(){
   this.router.navigate(['/ContextMenu'])
 }
+
+KendoGridDataBinding(){
+  this,this.router.navigate(['/KendoGridDataBinding'])
+}
 OnLogout() {
   localStorage.clear();
   this.router.navigate(['/Login']);
