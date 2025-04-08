@@ -55,6 +55,12 @@ treeViewContextMenu(){
 KendoGridDataBinding(){
   this,this.router.navigate(['/KendoGridDataBinding'])
 }
+
+KendoGridBuitInBinding(){
+  this,this.router.navigate(['/BuitInDirectiveBindingInGrid'])
+}
+
+
 OnLogout() {
   localStorage.clear();
   this.router.navigate(['/Login']);

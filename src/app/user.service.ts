@@ -20,20 +20,22 @@ import { UserAnswer } from './user-answer';
   
 
     createUser(user: any, file: File | null): Observable<any> {
-      debugger
-
-
-      // const formData = new FormData();
-      // formData.append("user", user);
       const formData = new FormData();
-      formData.append("FirstName", user.FirstName);
-      formData.append("SurName", user.SurName);
-      formData.append("DOB", user.DOB);
-      formData.append("Gender", user.Gender);
-      formData.append("EmialId", user.EmialId);
-      formData.append("UserName", user.UserName);
-      formData.append("PassWord", user.PassWord);
-      formData.append("HobbyId", user.HobbyId);
+    
+      const finalUser = {
+        FirstName: user.FirstName || user.firstName,
+        SurName: user.SurName || user.surName,
+        DOB: user.DOB || user.dob,
+        Gender: user.Gender || user.gender,
+        EmialId: user.EmialId || user.emialId,
+        UserName: user.UserName || user.userName,
+        PassWord: user.PassWord || user.passWord,
+        HobbyId: user.HobbyId || user.hobbyId,
+      };
+    
+      Object.entries(finalUser).forEach(([key, value]) => {
+        formData.append(key, value as string);
+      });
     
       if (file) {
         formData.append("file", file);
@@ -43,28 +45,32 @@ import { UserAnswer } from './user-answer';
     }
     
 
-    updateUser( user: any, file: File | null): Observable<any> {
-      debugger
+    updateUser(user: any, file: File | null): Observable<any> {
       const formData = new FormData();
-          formData.append("Id", user.id);
-      formData.append("FirstName", user.FirstName);
-      formData.append("SurName", user.SurName);
-      formData.append("DOB", user.DOB);
-      formData.append("Gender", user.Gender);
-      formData.append("EmialId", user.EmialId);
-      formData.append("UserName", user.UserName);
-      formData.append("PassWord", user.PassWord);
-      formData.append("HobbyId", user.HobbyId);
-
+    
+      const finalUser = {
+        Id: user.Id || user.id,
+        FirstName: user.FirstName || user.firstName,
+        SurName: user.SurName || user.surName,
+        DOB: user.DOB || user.dob,
+        Gender: user.Gender || user.gender,
+        EmialId: user.EmialId || user.emialId,
+        UserName: user.UserName || user.userName,
+        PassWord: user.PassWord || user.passWord,
+        HobbyId: user.HobbyId || user.hobbyId,
+      };
+    
+      Object.entries(finalUser).forEach(([key, value]) => {
+        formData.append(key, value as string);
+      });
+    
       if (file) {
         formData.append("file", file);
       }
-
     
-
-      return this.http.put<any>(`${this.apiurl}/${user.id}`, formData);
-  }
-
+      return this.http.put<any>(`${this.apiurl}/${finalUser.Id}`, formData);
+    }
+    
     
 
     deleteUser(id:number): Observable<any>{

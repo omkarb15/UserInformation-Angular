@@ -80,44 +80,10 @@ public dataStateChange(state:DataStateChangeEvent):void{
   this.loadItems()
 }
 
-public genderOptions = [
-  { text: 'Male', value:'Male' },
-  { text: 'Female', value:'Female' }
-];
+public buttonCount = 2;
+public sizes = [10, 20, 50];
 
 
-public genderFilterValue: string | null = null;
-
-onGenderFilterChange(value: string | null): void {
-  debugger
-  this.genderFilterValue = value;
-
-  const existingFilters = this.state.filter?.filters ?? [];
-console.log("Existingfilter", existingFilters)
-  // Remove existing gender filters
-  const otherFilters = existingFilters.filter((f: any) => f.field !== 'gender');
-
-  // Add gender filter only if a specific value is selected
-  if (value) {
-    otherFilters.push({
-      field: 'gender',
-      operator: 'eq',
-      value: value
-    });
-  }
-
-  // Update the filter object
-  this.state = {
-    ...this.state,
-    filter: {
-      logic: 'and',
-      filters: otherFilters
-    }
-  };
-
-  // Trigger Kendo to reload with updated filters
-  this.loadItems();
-}
 
 
 
