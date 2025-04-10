@@ -59,11 +59,15 @@ KendoGridDataBinding(){
 KendoGridBuitInBinding(){
   this,this.router.navigate(['/BuitInDirectiveBindingInGrid'])
 }
+kendoGridExternalEditing(){
+  this.router.navigate(['/ExternalEditing'])
+}
 
 
 OnLogout() {
   localStorage.clear();
   this.router.navigate(['/Login']);
 }
+
 
 }

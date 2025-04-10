@@ -12,6 +12,7 @@ import { ContextMenuComponent } from './TreeView/context-menu/context-menu.compo
 import { authGuard } from './auth.guard';
 import { DataBindingComponent } from '../Kendo-Grid/data-binding/data-binding.component';
 import { BuitInDirectiveBindingComponent } from '../Kendo-Grid/buit-in-directive-binding/buit-in-directive-binding.component';
+import { ExternalEditingComponent } from '../Kendo-Grid/external-editing/external-editing.component';
 
 
 export const routes: Routes = [
@@ -74,6 +75,10 @@ export const routes: Routes = [
     },
     {path:'BuitInDirectiveBindingInGrid',
         component:BuitInDirectiveBindingComponent
+    },
+    {
+        path:'ExternalEditing',
+        component:ExternalEditingComponent
     }
 ];
 

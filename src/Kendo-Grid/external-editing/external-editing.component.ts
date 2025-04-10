@@ -1,27 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { CreateFormGroupArgs, GridDataResult, GridModule, KENDO_GRID } from '@progress/kendo-angular-grid';
-import { UserService } from '../../app/user.service';
+import { Component, NgModule, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
+import { UserService } from '../../app/user.service';
+import { KENDO_DIALOG } from '@progress/kendo-angular-dialog';
 import { KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
-import { KENDO_DIALOG } from "@progress/kendo-angular-dialog";
+import { GridModule, KENDO_GRID, RowClassArgs } from '@progress/kendo-angular-grid';
+import { CommonModule } from '@angular/common';
+import { fileExcelIcon, filePdfIcon, SVGIcon } from '@progress/kendo-svg-icons';
+import { KENDO_INDICATORS } from "@progress/kendo-angular-indicators";
+import { KENDO_TOOLBAR } from "@progress/kendo-angular-toolbar";
 @Component({
-  selector: 'app-buit-in-directive-binding',
-  imports: [KENDO_GRID,CommonModule,GridModule,FormsModule,KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG],
-  templateUrl: './buit-in-directive-binding.component.html',
-  styleUrl: './buit-in-directive-binding.component.css'
+  selector: 'app-external-editing',
+   imports: [KENDO_GRID,CommonModule,GridModule,FormsModule,KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG,KENDO_INDICATORS,KENDO_TOOLBAR],
+  templateUrl: './external-editing.component.html',
+  styleUrl: './external-editing.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
-export class BuitInDirectiveBindingComponent  implements OnInit{
-
-
-  constructor (private  userService:UserService, private router:Router, private formBuilder:FormBuilder){}
-  ngOnInit(): void {
-    this.getAssetData()
-  }
+export class ExternalEditingComponent implements OnInit {
+constructor (private  userService:UserService, private router:Router, private formBuilder:FormBuilder){}
+ngOnInit(): void {
+  this.getAssetData()
+}
 public gridData:any[]=[]
 public formGroup!:FormGroup
 public editedRowIndex:number|undefined
+public filepdfIcon:SVGIcon=filePdfIcon
+public filExcelIcon:SVGIcon=fileExcelIcon
+
+public rowCallback = (context: RowClassArgs) => {
+  if (context.dataItem.Gender === 'Male') {
+    return { gold: true };
+  } else if (context.dataItem.Gender === 'Female') {
+    return { green: true };  
+  }
+  return {};
+};
 
 
 getAssetData(){
@@ -37,6 +50,7 @@ this.gridData = data.map((item: any) => {
 });
   })
 }
+
 public reactiveFormGroup = (args: { dataItem?: any; isNew: boolean }): FormGroup => {
   const item = args.isNew ? {} : args.dataItem;
   return this.formBuilder.group({
@@ -65,10 +79,32 @@ public hobbyOptions = [
   { text: 'Gardening', value: '3' },
   { text: 'Painting', value: '4' },
   { text: 'Playing', value: '5' }
-];
+]
 
+public onCellClick(event:any):void{
+  debugger
+  console.log("cell Clicked", event)
+  const rowIndex=event.rowIndex
+  if(event.columnIndex===this.getActionColumnIndex()){
+    return
+  }
+if(this.editedRowIndex!==rowIndex){
+  const sender=event.sender
+  if (this.editedRowIndex !== undefined && this.editedRowIndex !== rowIndex) {
+    this.cancelHandler({ sender, rowIndex: this.editedRowIndex });
+  }
 
+  if (this.editedRowIndex !== rowIndex) {
+    this.editHandler({ sender, rowIndex, dataItem: event.dataItem })
+  }
+}
+this.editedRowIndex = undefined  
 
+}
+private getActionColumnIndex(): number {
+
+  return 9; 
+}
 public addHandler({ sender }: any): void {
   this.formGroup = this.reactiveFormGroup({ isNew: true });
   sender.addRow(this.formGroup);
@@ -81,13 +117,14 @@ public editHandler({ sender, rowIndex, dataItem }: any): void {
 }
 
 public cancelHandler({ sender, rowIndex }: any): void {
-  sender.cancelRow(rowIndex);
+  if (rowIndex !== undefined) {
+    sender.cancelRow(rowIndex);
+  }
+  this.editedRowIndex = undefined;                      //o that future clicks can correctly enter edit mode.
 }
 
 public saveHandler({ sender, rowIndex, formGroup,isNew }: any): void {
   const user = formGroup.value;
-
-  
   const formattedDob = this.formatDateForBackend(user.dob);
   user.dob = formattedDob;
 
@@ -113,6 +150,7 @@ else{
 }
  
 }
+
 
 private formatDateForBackend(date: Date): string {
   if (!date) return '';
@@ -147,3 +185,4 @@ public buttonCount = 2;
 public sizes = [10, 20, 50];
 
 }
+

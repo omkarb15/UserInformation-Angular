@@ -1,31 +1,51 @@
-<kendo-grid
+<p>Inline Edit on row Click</p>
+<kendo-grid 
+
 [kendoGridBinding]="gridData"
+[rowClass]="rowCallback"
 [kendoGridReactiveEditing]="reactiveFormGroup"
 [pageSize]="50"
+(cellClick)="onCellClick($event)"
 [pageable]="true"
 [sortable]="true"
 [filterable]="true"
 [groupable]="true"
 [height]="500"
 (edit)="editHandler($event)"
-(add)="addHandler($event)"
+(add)="addHandler($event)"  
 (cancel)="cancelHandler($event)"
 (save)="saveHandler($event)"
 (remove)="removeHandler($event)"
+
 [navigable]="true"
+id="my-grid" 
+
+
 >
-<ng-template kendoGridToolbarTemplate>
+<!-- <ng-template kendoGridToolbarTemplate>
 <button kendoGridAddCommand  [primary]="true">Add New  </button>
-</ng-template>
+<button kendoGridPDFCommand [svgIcon]="filepdfIcon">
+    Export to PDF
+  </button>
+  <button kendoGridExcelCommand [svgIcon]="filExcelIcon"> Export To Excel</button>
+</ng-template> -->
+<kendo-toolbar>
+    <kendo-toolbar-button text="Add new"   kendoGridAddTool look="outline" ></kendo-toolbar-button>
+<kendo-toolbar-separator></kendo-toolbar-separator>
+<kendo-toolbar-spacer></kendo-toolbar-spacer>
+<kendo-toolbar-button text="Pdf Export" kendoGridPDFTool look="outline" ></kendo-toolbar-button>
+<kendo-toolbar-button text="Excel Export" kendoGridExcelTool look="outline"></kendo-toolbar-button>
+</kendo-toolbar> 
 
-
-<kendo-grid-column title="Sr. No." [width]="10" >
+<kendo-grid-column title="Sr. No." [width]="120" [headerStyle]="{ 'background-color': '#666' }"
+[headerClass]="'headerCustomClass'" >
     <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
       {{  rowIndex + 1 }}
     </ng-template>
   </kendo-grid-column>
 
-  <kendo-grid-column field="firstName" title="First Name" [width]="20">
+  <kendo-grid-column field="firstName" title="First Name" [width]="350" [sticky]="true"  [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'">
     <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
           <kendo-grid-string-filter-cell
             [column]="column"
@@ -38,10 +58,12 @@
         </ng-template>
 
   </kendo-grid-column>
-  <kendo-grid-column field="surName" title="Surname" [width]="20"></kendo-grid-column>
+  <kendo-grid-column field="surName" title="Surname" [width]="250" [sticky]="true" [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'"></kendo-grid-column>
 
   
-  <kendo-grid-column field="dob" title="DOB"  filter= "date"   format="MM/dd/yyyy" editor="date" [width]="20">
+  <kendo-grid-column field="dob" title="DOB"  filter= "date"   format="MM/dd/yyyy" editor="date" [width]="250"  [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'">
     <ng-template kendoGridCellTemplate let-dataItem >
         {{ dataItem.dob | date: 'MM/dd/yyyy' }}
      </ng-template> 
@@ -54,24 +76,29 @@
       </kendo-grid-date-filter-cell>
     </ng-template>
   </kendo-grid-column>
-  <kendo-grid-column field="gender" title="Gender" [width]="20" >
+  <kendo-grid-column field="gender" title="Gender" [width]="250" [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'"  >
 <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
   <kendo-dropdownlist 
   [formControl]="formGroup.get('gender')"
   [data]="genderOptions"
   textField="text"
   valueField="value"
-  [valuePrimitive]="true"
+  [valuePrimitive]="true"   
   >
     
   </kendo-dropdownlist>
 
 </ng-template>
   </kendo-grid-column>
-  <kendo-grid-column field="emialId" title="EmailId" [width]="20" [filterable]="false" ></kendo-grid-column>
-  <kendo-grid-column field="userName" title="UserName" [width]="20" [filterable]="false"></kendo-grid-column>
-  <kendo-grid-column field="passWord" title="PassWord" [width]="20" [filterable]="false"></kendo-grid-column>
-  <kendo-grid-column field="hobbyName" title="Hobbies" [width]="20">
+  <kendo-grid-column field="emialId" title="EmailId" [width]="250"  [filterable]="false" [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'" ></kendo-grid-column>
+  <kendo-grid-column field="userName" title="UserName" [width]="250" [filterable]="false" [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'"></kendo-grid-column>
+  <kendo-grid-column field="passWord" title="PassWord" [width]="250" [filterable]="false" [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'"></kendo-grid-column>
+  <kendo-grid-column field="hobbyName" title="Hobbies" [width]="250" [sticky]="true" [headerStyle]="{ 'background-color': '#666' }"
+  [headerClass]="'headerCustomClass'">
     <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
       <kendo-multiselect
       [formControl]="formGroup.get('hobbyName')"
@@ -87,7 +114,8 @@
   </kendo-grid-column>
   
 
-  <kendo-grid-command-column title="Action" [width]="20">
+  <kendo-grid-command-column title="Action" [width]="250"  [headerStyle]="{ 'background-color': '#666' }"
+        [headerClass]="'headerCustomClass'">
     <ng-template kendoGridCellTemplate let-isNew="isNew" let-editFormGroup="editFormGroup">
       <button kendoGridEditCommand [primary]="true">Edit</button>
       <button kendoGridRemoveCommand>Remove</button>
@@ -102,6 +130,34 @@
       </button>
     </ng-template>
   </kendo-grid-command-column>
+
+  <kendo-grid-pdf 
+  fileName="UserList.pdf"
+  [allPages]="true"
+  paperSize="A4"
+  [repeatHeaders]="true"
+  [landscape]="true"
+  >
+  <kendo-grid-pdf-margin
+  top="2cm"
+  left="1cm"
+  right="1cm"
+  bottom="2cm"
+  > </kendo-grid-pdf-margin>
+<ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+    <div class="page-template">
+        <div class="header">
+            <div style="float:right">
+                Page{{pageNum}} of {{totalPages}}
+            </div>
+multi-pager grid with automatic page breaking
+    </div>
+<div class="footer">Page{{pageNum}} of {{totalPages}}</div>
+</div>
+</ng-template>
+
+  </kendo-grid-pdf>
+  <kendo-grid-excel fileName="Userlist.xlsx"></kendo-grid-excel>
   
    
   <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
@@ -125,7 +181,9 @@
     </button>
   </kendo-dialog-actions>
 </kendo-dialog>
-  
+
+
+
 
 
 

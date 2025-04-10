@@ -1,4 +1,4 @@
-UserInformatioin
+UserInformation
 
 <kendo-grid
   [data]="gridview"
@@ -15,14 +15,25 @@ UserInformatioin
   [group]="state.group"
   (dataStateChange)="dataStateChange($event)"
 
-  
+  (save)="saveHandler($event)"
 
+  (cellClick)="cellClickHandler($event)"
+  (cellClose)="cellCloseHandler($event)"
+  (remove)="removeHandler($event)"
+  (add)="addHandler($event)"
+  (cancel)="cancelHandler($event)"
+  (editable)="{ mode: 'incell' }"
+[navigatable]="true"
   [height]="500"
 >
-<!-- (sortChange)="onSortChange($event)"
-(filterChange)="onFilterChange($event)"
-(groupChange)="onGroupChange($event)" 
-(pageChange)="onPageChange($event)" -->
+<ng-template kendoGridToolbarTemplate>
+  <button kendoGridAddCommand  [primary]="true">Add New  </button>
+  <button kendoGridExcelCommand [svgIcon]="fileExcelIcon"> Export To Excel</button>
+  <button kendoGridPDFCommand [svgIcon]="filePdfIcon"> Export To Pdf</button>
+  </ng-template>
+  
+
+
 <kendo-grid-column title="Sr. No." [width]="10" >
     <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
       {{ skip + rowIndex + 1 }}
@@ -49,7 +60,7 @@ UserInformatioin
 
   <kendo-grid-column field="surName" title="Surname" [width]="20"></kendo-grid-column>
 
-  <kendo-grid-column field="dob" title="DOB"  filter= "date"   format="MM/dd/yyyy" [width]="20">
+  <kendo-grid-column field="dob" title="DOB"  filter= "date"   format="MM/dd/yyyy" editor="date" [width]="20">
     <ng-template kendoGridCellTemplate let-dataItem >
         {{ dataItem.dob | date: 'MM/dd/yyyy' }}
      </ng-template> 
@@ -72,12 +83,48 @@ UserInformatioin
   <kendo-grid-column field="emialId" title="EmailId" [width]="20" [filterable]="false" ></kendo-grid-column>
   <kendo-grid-column field="userName" title="UserName" [width]="20" [filterable]="false"></kendo-grid-column>
   <kendo-grid-column field="passWord" title="PassWord" [width]="20" [filterable]="false"></kendo-grid-column>
-  <kendo-grid-column field="hobbyName" title="Hobbies" [width]="20" [filterable]="true"></kendo-grid-column>
-  <kendo-grid-column title="Profile Image" [width]="20">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      <img [src]="dataItem.profilImage" width="60" height="60" style="border-radius: 50%;" alt="Profile Image"/>
-    </ng-template>
+  <kendo-grid-column field="hobbyId" title="Hobbies" [width]="20">
+    
+  
   </kendo-grid-column>
+  <kendo-grid-pdf
+  fileName="UserList.pdf"
+  [allPages]="true"
+  paperSize="A4"
+  [repeatHeaders]="true"
+  [landscape]="true"
+>
+  <kendo-grid-pdf-margin
+    top="2cm"
+    left="1cm"
+    right="1cm"
+    bottom="2cm"
+  ></kendo-grid-pdf-margin>
+  <ng-template
+    kendoGridPDFTemplate
+    let-pageNum="pageNum"
+    let-totalPages="totalPages"
+  >
+    <div class="page-template">
+      <div class="header">
+        <div style="float: right">
+          Page {{ pageNum }} of {{ totalPages }}
+        </div>
+        Multi-page grid with automatic page breaking
+      </div>
+      <div class="footer">Page {{ pageNum }} of {{ totalPages }}</div>
+    </div>
+  </ng-template>
+</kendo-grid-pdf>
+<kendo-grid-excel fileName="UserList.xlsx"></kendo-grid-excel>
+  <kendo-grid-command-column title="Command" [width]="20">
+    <ng-template kendoGridCellTemplate let-isNew="isNew">
+      <button kendoGridRemoveCommand >Remove</button>
+      <button kendoGridSaveCommand [primary]="true">Save</button>
+      <button kendoGridCancelCommand>Cancel</button>
+    </ng-template>
+  </kendo-grid-command-column>
+  
   
   <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
     <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
@@ -90,6 +137,23 @@ UserInformatioin
   </ng-template>
   
 </kendo-grid>
+<kendo-dialog *ngIf="itemToRemove" title="Please confirm" (close)="confirmRemove(false)">
+  <p style="margin: 30px; text-align: center;">
+    Are you sure you want to delete user {{ itemToRemove.firstName }} {{ itemToRemove.surName }}?
+  </p>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="confirmRemove(false)">No</button>
+    <button
+      kendoButton
+      themeColor="primary"
+      (click)="confirmRemove(true)"
+      
+    >
+      Yes
+    </button>
+  </kendo-dialog-actions>
+</kendo-dialog>
+  
    
    
    
@@ -101,8 +165,10 @@ UserInformatioin
    
    
    
-   
-   
+   <!-- (sortChange)="onSortChange($event)"
+(filterChange)="onFilterChange($event)"
+(groupChange)="onGroupChange($event)" 
+(pageChange)="onPageChange($event)" -->
    
    
    <!-- <kendo-grid
