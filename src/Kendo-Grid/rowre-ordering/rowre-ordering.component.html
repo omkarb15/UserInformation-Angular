@@ -1,0 +1,26 @@
+<p>rowre-ordering works!</p>
+
+
+<kendo-grid
+[kendoGridBinding]="gridData"
+[pageable]="true"
+[sortable]="true"
+[filterable]="true"
+[groupable]="true"
+[rowReorderable]="true"
+(rowReorder)="onRowReorder($event)"
+
+
+>
+<kendo-grid-rowreorder-column [width]="40"></kendo-grid-rowreorder-column>
+<kendo-grid-column title="Sr.No." [width]="100" >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex+1}}
+    </ng-template>
+</kendo-grid-column>
+<kendo-grid-column title="Id" field="id" [width]="100"></kendo-grid-column>
+<kendo-grid-column field="companyName" title="CompanyName"></kendo-grid-column>
+<kendo-grid-column field="contactTitle" title="ContactTitle"></kendo-grid-column>
+<kendo-grid-column field="city" title="City"></kendo-grid-column>
+
+</kendo-grid>

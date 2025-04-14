@@ -1,3 +1,8 @@
+
+<div
+
+>
+
 <kendo-grid
 [kendoGridBinding]="gridData"
 [kendoGridReactiveEditing]="reactiveFormGroup"
@@ -13,12 +18,13 @@
 (save)="saveHandler($event)"
 (remove)="removeHandler($event)"
 [navigable]="true"
+[rowReorderable]="true"
 >
 <ng-template kendoGridToolbarTemplate>
 <button kendoGridAddCommand  [primary]="true">Add New  </button>
 </ng-template>
 
-
+<kendo-grid-rowreorder-column [width]="40"> </kendo-grid-rowreorder-column>
 <kendo-grid-column title="Sr. No." [width]="10" >
     <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
       {{  rowIndex + 1 }}
@@ -114,6 +120,8 @@
 <kendo-pager-page-sizes [pageSizes]="sizes"></kendo-pager-page-sizes>
   </ng-template>
 </kendo-grid>
+
+
 <kendo-dialog *ngIf="itemToRemove" title="Please confirm" (close)="confirmRemove(false)">
   <p style="margin: 30px; text-align: center;">
     Are you sure you want to delete user {{ itemToRemove.firstName }} {{ itemToRemove.surName }}?
@@ -125,7 +133,8 @@
     </button>
   </kendo-dialog-actions>
 </kendo-dialog>
-  
+
+</div>
 
 
 

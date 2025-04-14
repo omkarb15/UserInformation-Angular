@@ -142,6 +142,22 @@ updateIschecked(node:any):Observable<any>{
   return this.http.put(`http://localhost:5244/api/Trees/ChangeIschecked`,node)
 }
 
+getCustomerRowReorder():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/GetCustomerForRowReorder`)
+}
+updateRowOrder(customers:any[]){
+  return this.http.post(`http://localhost:5244/api/Trees/Update-order`,customers)
+}
 
+getInStockProductGrid():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/InStockProduct`)
+}
+getDiscontinuedProduct():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/DiscontinuedProduct`)
+}
+updateStatus(id:number, discontinued:boolean):Observable<any>{
+
+  return this.http.put(`http://localhost:5244/api/Trees/UpdateForProduct/${id}`,discontinued)
+}
 
   }

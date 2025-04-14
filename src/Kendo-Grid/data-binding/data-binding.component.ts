@@ -111,7 +111,7 @@ public dataStateChange(state:DataStateChangeEvent):void{
   this.loadItems()
 }
 public cellClickHandler(args:CellClickEvent):void{
-  if(!args.isEdited){
+  if(!args.isEdited){                                        //if not in edit mode already 
     args.sender.editCell(
       args.rowIndex,
       args.columnIndex,

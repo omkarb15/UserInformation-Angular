@@ -13,6 +13,8 @@ import { authGuard } from './auth.guard';
 import { DataBindingComponent } from '../Kendo-Grid/data-binding/data-binding.component';
 import { BuitInDirectiveBindingComponent } from '../Kendo-Grid/buit-in-directive-binding/buit-in-directive-binding.component';
 import { ExternalEditingComponent } from '../Kendo-Grid/external-editing/external-editing.component';
+import { RowreOrderingComponent } from '../Kendo-Grid/rowre-ordering/rowre-ordering.component';
+import { DragDropBetGridComponent } from '../Kendo-Grid/drag-drop-bet-grid/drag-drop-bet-grid.component';
 
 
 export const routes: Routes = [
@@ -79,6 +81,16 @@ export const routes: Routes = [
     {
         path:'ExternalEditing',
         component:ExternalEditingComponent
+    },
+
+
+    {path:'RowReorderIng',
+        component:RowreOrderingComponent
+
+    },
+    {
+        path:'GridDragDrop',
+        component:DragDropBetGridComponent
     }
 ];
 

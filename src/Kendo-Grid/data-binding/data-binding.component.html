@@ -84,9 +84,10 @@ UserInformation
   <kendo-grid-column field="userName" title="UserName" [width]="20" [filterable]="false"></kendo-grid-column>
   <kendo-grid-column field="passWord" title="PassWord" [width]="20" [filterable]="false"></kendo-grid-column>
   <kendo-grid-column field="hobbyId" title="Hobbies" [width]="20">
-    
   
   </kendo-grid-column>
+
+
   <kendo-grid-pdf
   fileName="UserList.pdf"
   [allPages]="true"
@@ -116,7 +117,9 @@ UserInformation
     </div>
   </ng-template>
 </kendo-grid-pdf>
+
 <kendo-grid-excel fileName="UserList.xlsx"></kendo-grid-excel>
+
   <kendo-grid-command-column title="Command" [width]="20">
     <ng-template kendoGridCellTemplate let-isNew="isNew">
       <button kendoGridRemoveCommand >Remove</button>

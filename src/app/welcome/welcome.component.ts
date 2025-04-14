@@ -62,7 +62,12 @@ KendoGridBuitInBinding(){
 kendoGridExternalEditing(){
   this.router.navigate(['/ExternalEditing'])
 }
-
+KendoGridRowReorder(){
+  this.router.navigate(['/RowReorderIng'])
+}
+kendoGridDragDrop(){
+  this.router.navigate(['/GridDragDrop'])
+}
 
 OnLogout() {
   localStorage.clear();

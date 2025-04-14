@@ -27,14 +27,6 @@ public editedRowIndex:number|undefined
 public filepdfIcon:SVGIcon=filePdfIcon
 public filExcelIcon:SVGIcon=fileExcelIcon
 
-public rowCallback = (context: RowClassArgs) => {
-  if (context.dataItem.Gender === 'Male') {
-    return { gold: true };
-  } else if (context.dataItem.Gender === 'Female') {
-    return { green: true };  
-  }
-  return {};
-};
 
 
 getAssetData(){
@@ -88,7 +80,7 @@ public onCellClick(event:any):void{
   if(event.columnIndex===this.getActionColumnIndex()){
     return
   }
-if(this.editedRowIndex!==rowIndex){
+if(this.editedRowIndex!==rowIndex){                   //Checks if the clicked row is different from the one currently being edited.
   const sender=event.sender
   if (this.editedRowIndex !== undefined && this.editedRowIndex !== rowIndex) {
     this.cancelHandler({ sender, rowIndex: this.editedRowIndex });
@@ -99,8 +91,9 @@ if(this.editedRowIndex!==rowIndex){
   }
 }
 this.editedRowIndex = undefined  
-
 }
+
+
 private getActionColumnIndex(): number {
 
   return 9; 
