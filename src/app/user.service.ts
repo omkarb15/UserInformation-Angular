@@ -155,9 +155,11 @@ getInStockProductGrid():Observable<any>{
 getDiscontinuedProduct():Observable<any>{
   return this.http.get(`http://localhost:5244/api/Trees/DiscontinuedProduct`)
 }
-updateStatus(id:number, discontinued:boolean):Observable<any>{
+updateStatus(id: number, discontinued: boolean): Observable<any> {
+  debugger
+  return this.http.put(`http://localhost:5244/api/Trees/UpdateForProduct/${id}`, { discontinued });
 
-  return this.http.put(`http://localhost:5244/api/Trees/UpdateForProduct/${id}`,discontinued)
 }
+
 
   }

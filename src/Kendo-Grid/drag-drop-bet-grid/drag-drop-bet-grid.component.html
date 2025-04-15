@@ -1,31 +1,63 @@
-<div style="display: flex; gap: 20px; justify-content: space-around; padding: 20px;">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css"
+/>
+<div
+  class="grids-container"
+  kendoDragTargetContainer
+  kendoDropTargetContainer
+  dragTargetFilter=".k-master-row"
+  dropTargetFilter=".k-master-row"
+  [dragData]="dragData"
+  [hint]="{ hintClass: 'rowHint' }"
+  (onDrop)="onDrop($event)"
 
-    <div style="flex: 1; max-width: 48%; background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-      <h3 style="text-align: center; margin-bottom: 10px;">In Stock Products</h3>
-      <kendo-grid
-        [kendoGridBinding]="gridDataItem1"
-        [pageable]="true"
-        [sortable]="true"
-      >
-        <kendo-grid-column title="Product Name" field="productName" [width]="120"></kendo-grid-column>
-        <kendo-grid-column title="Unit Price" field="unitPrice" [width]="100"></kendo-grid-column>
-        <kendo-grid-column title="In Stock" field="discontinued" [width]="80"></kendo-grid-column>
-      </kendo-grid>
-    </div>
-  
+  style="display: flex; gap: 20px; justify-content: space-around;"
+>
+ 
+  <kendo-grid
+    [data]="gridDataItem1"
+    data-kendo-grid-index="0"
+    style="width: 45%;"
+  >
+    <kendo-grid-column [width]="40">
+      <ng-template kendoGridCellTemplate>
+        <span class="k-icon k-font-icon k-i-reorder"
+        kendoGridDragHandle
+        ></span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="productName" title="Product Name"></kendo-grid-column>
+    <kendo-grid-column field="unitPrice" title="Price" [width]="80"></kendo-grid-column>
+    <kendo-grid-column field="discontinued" title="In Stock" [width]="100">
+      <ng-template kendoGridCellTemplate>
+        <span class="k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline">
+          Available
+        </span>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
 
-    <div style="flex: 1; max-width: 48%; background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-      <h3 style="text-align: center; margin-bottom: 10px;">Discontinued Products</h3>
-      <kendo-grid
-        [kendoGridBinding]="gridDataItem2"
-        [pageable]="true"
-        [sortable]="true"
-      >
-        <kendo-grid-column title="Product Name" field="productName" [width]="120"></kendo-grid-column>
-        <kendo-grid-column title="Unit Price" field="unitPrice" [width]="100"></kendo-grid-column>
-        <kendo-grid-column title="Discontinued" field="discontinued" [width]="80"></kendo-grid-column>
-      </kendo-grid>
-    </div>
-  
-  </div>
-  
+  <kendo-grid
+    [data]="gridDataItem2"
+    data-kendo-grid-index="1"
+    style="width: 45%;"
+  >
+    <kendo-grid-column [width]="40">
+      <ng-template kendoGridCellTemplate>
+        <span class="k-icon k-font-icon k-i-reorder"
+        kendoGridDragHandle>
+      </span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="productName" title="Product Name"></kendo-grid-column>
+    <kendo-grid-column field="unitPrice" title="Price" [width]="80"></kendo-grid-column>
+    <kendo-grid-column field="discontinued" title="In Stock" [width]="100">
+      <ng-template kendoGridCellTemplate>
+        <span class="k-badge k-badge-solid k-badge-solid-error k-badge-md k-rounded-md k-badge-inline">
+          Not Available
+        </span>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>
