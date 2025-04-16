@@ -3,13 +3,15 @@
   href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css"
 />
 <div
-  class="grids-container"
+  class="demo-container"
+   #wrapper
   kendoDragTargetContainer
   kendoDropTargetContainer
   dragTargetFilter=".k-master-row"
   dropTargetFilter=".k-master-row"
   [dragData]="dragData"
   [hint]="{ hintClass: 'rowHint' }"
+  dragHandle=".k-i-reorder"
   (onDrop)="onDrop($event)"
 
   style="display: flex; gap: 20px; justify-content: space-around;"
@@ -23,7 +25,7 @@
     <kendo-grid-column [width]="40">
       <ng-template kendoGridCellTemplate>
         <span class="k-icon k-font-icon k-i-reorder"
-        kendoGridDragHandle
+ 
         ></span>
       </ng-template>
     </kendo-grid-column>
@@ -46,7 +48,7 @@
     <kendo-grid-column [width]="40">
       <ng-template kendoGridCellTemplate>
         <span class="k-icon k-font-icon k-i-reorder"
-        kendoGridDragHandle>
+        >
       </span>
       </ng-template>
     </kendo-grid-column>
