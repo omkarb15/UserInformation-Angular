@@ -160,6 +160,9 @@ updateStatus(id: number, discontinued: boolean): Observable<any> {
   return this.http.put(`http://localhost:5244/api/Trees/UpdateForProduct/${id}`, { discontinued });
 
 }
+DeleteMultipleuserIngrid(userIds: number[]): Observable<any> {
+  return this.http.post(`${this.apiurl}/DeleteUsers`, userIds);
+}
 
 
   }

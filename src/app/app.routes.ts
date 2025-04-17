@@ -15,6 +15,8 @@ import { BuitInDirectiveBindingComponent } from '../Kendo-Grid/buit-in-directive
 import { ExternalEditingComponent } from '../Kendo-Grid/external-editing/external-editing.component';
 import { RowreOrderingComponent } from '../Kendo-Grid/rowre-ordering/rowre-ordering.component';
 import { DragDropBetGridComponent } from '../Kendo-Grid/drag-drop-bet-grid/drag-drop-bet-grid.component';
+import { RadioButtonComponent } from '@progress/kendo-angular-inputs';
+import { RadioButtonWithGridComponent } from '../Kendo-Grid/radio-button-with-grid/radio-button-with-grid.component';
 
 
 export const routes: Routes = [
@@ -91,6 +93,10 @@ export const routes: Routes = [
     {
         path:'GridDragDrop',
         component:DragDropBetGridComponent
+    },
+    {
+        path:'RadioButtonWithGrid',
+        component:RadioButtonWithGridComponent
     }
 ];
 

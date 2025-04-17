@@ -129,4 +129,8 @@ export class UserFormComponent implements OnInit {
       });
     }
   }
+  navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
 }     
+

@@ -1,4 +1,5 @@
-  <p>Kendo-TreeView Crud Operation</p>
+  <p class="centered-text">Kendo-TreeView Crud Operation With Context Menu</p>
+  <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 
   <div class="example-config">
       selected keys: {{selectedKeys.join(",")}}
@@ -58,7 +59,7 @@
   (keydown.escape)="cancelEditing()" />
 
 </ng-container>
-
+  
 <ng-template #displayNodes>
 <span>{{dataItem.name}}</span>
 </ng-template>

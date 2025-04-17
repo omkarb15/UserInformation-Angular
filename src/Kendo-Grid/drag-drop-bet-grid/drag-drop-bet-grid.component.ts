@@ -75,21 +75,20 @@ public onDrop(event: DropTargetEvent): void {
     if (!gridElement) return;
   
     const toGrid = +gridElement.getAttribute("data-kendo-grid-index")!;
-    const fromCollection = fromGrid === 0 ? this.gridDataItem1 : this.gridDataItem2; // getting grid data
-    const toCollection = toGrid === 0 ? this.gridDataItem1 : this.gridDataItem2;
+
+      const fromCollection = fromGrid === 0 ? this.gridDataItem1 : this.gridDataItem2; // getting grid data
+      const toCollection = toGrid === 0 ? this.gridDataItem1 : this.gridDataItem2;
   
     const item = fromCollection[fromIndex];
   
-    // Update the status (toggle discontinued)
-    item.discontinued = !item.discontinued;
-  
-    // Remove from original grid collection
+    if(fromGrid !== toGrid){
+      item.discontinued = !item.discontinued;
+    }
+    
     fromCollection.splice(fromIndex, 1)
   
-    // Calculate destination index
     const toIndex = this.calculateDestinationIndex(event, fromGrid, fromIndex, toGrid);
   
-    // Add to new collection
     toCollection.splice(toIndex, 0, item)
 
   // Force grid to re-evaluate by reassigning reference
@@ -100,8 +99,7 @@ public onDrop(event: DropTargetEvent): void {
   
   //   this.gridDataItem2 = [...this.gridDataItem2];
   // }
-  this.gridDataItem1 = [...this.gridDataItem1]  // Reassigning to trigger grid re-render
-  this.gridDataItem2 = [...this.gridDataItem2]
+
   
 
  
@@ -115,6 +113,7 @@ public onDrop(event: DropTargetEvent): void {
   this.dropTargetContainer?.notify()
 }
 
+
 private calculateDestinationIndex( event: DropTargetEvent,fromGrid: number,fromIndex: number,toGrid: number): number {
 debugger
   const dropTarget = event.dropTarget as HTMLElement
@@ -123,7 +122,7 @@ debugger
 
   if (!targetRow || !gridElement) return toGrid === 0 ? this.gridDataItem1.length : this.gridDataItem2.length;
 
-  const allRows = Array.from(gridElement.querySelectorAll(".k-master-row"));
+  const allRows = Array.from(gridElement.querySelectorAll(".k-master-row"));                //This selects all the rows (.k-master-row) within the target grid and converts the NodeList to an array for easier manipulation.
   const dropIndex = allRows.indexOf(targetRow);
 
   return fromGrid === toGrid && dropIndex > fromIndex ? dropIndex - 1 : dropIndex
@@ -131,7 +130,9 @@ debugger
 
 
 
-
+navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
   
 
 }

@@ -68,6 +68,9 @@ KendoGridRowReorder(){
 kendoGridDragDrop(){
   this.router.navigate(['/GridDragDrop'])
 }
+gridWithRadioButton(){
+  this.router.navigate(['/RadioButtonWithGrid'])
+}
 
 OnLogout() {
   localStorage.clear();

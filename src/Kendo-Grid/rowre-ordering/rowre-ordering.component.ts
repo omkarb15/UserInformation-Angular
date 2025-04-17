@@ -53,6 +53,8 @@ onRowReorder(event: any): void {
     console.log(" Updated order saved to DB");
   });
 }
-
+navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
 
 }

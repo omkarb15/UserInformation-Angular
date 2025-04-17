@@ -136,7 +136,9 @@ trackByIndex(index: number, obj: any): any {
   this.router.navigate(['/Login'])
  }
 
-
+ navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
 
 
   

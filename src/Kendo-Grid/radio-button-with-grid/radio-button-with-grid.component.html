@@ -1,0 +1,45 @@
+<p class="centered-text">Radio Button With Grid To Answer The Given Questions</p>
+<!-- <button class="btn btn-success m-2" (click)="navigateToWelcomePage()">← BACK</button> -->
+
+<div class="container">
+  <h2 class="bg-secondary text-white p-2">Answer Given Questions</h2>
+
+  <kendo-grid 
+  [data]="questions" 
+  [scrollable]="'scrollable'" 
+  [height]="500">
+
+<kendo-grid-column title="Sr.No." [width]="100" >
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex+1}}
+    </ng-template>
+</kendo-grid-column>
+    <kendo-grid-column field="questionText" title="Question" [width]="400"></kendo-grid-column>
+
+    <kendo-grid-column title="Options">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div *ngFor="let option of dataItem.options">
+         <kendo-label>
+            <kendo-radiobutton
+            [name]="'question' + dataItem.questionId"
+            [value]="option.optionId"
+            [(ngModel)]="userAnswers[dataItem.questionId]"
+            ></kendo-radiobutton>
+            
+            
+            
+            {{ option.optionText }}
+         </kendo-label>
+         
+        
+          <br />
+        </div>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+
+  <div class="mt-3">
+    <button class="btn btn-success" (click)="submitAnswers()">Submit</button>
+    <!-- <button class="btn btn-danger ms-2" (click)="OnLogout()">Logout</button> -->
+  </div>
+</div>

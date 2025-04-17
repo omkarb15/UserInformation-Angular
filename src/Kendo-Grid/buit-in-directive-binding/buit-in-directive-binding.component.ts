@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
 import { KENDO_DIALOG } from "@progress/kendo-angular-dialog";
+
 @Component({
   selector: 'app-buit-in-directive-binding',
   imports: [KENDO_GRID,CommonModule,GridModule,FormsModule,KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG],
@@ -70,6 +71,7 @@ public hobbyOptions = [
 
 
 public addHandler({ sender }: any): void {
+  
   this.formGroup = this.reactiveFormGroup({ isNew: true });
   sender.addRow(this.formGroup);
 }
@@ -85,14 +87,18 @@ public cancelHandler({ sender, rowIndex }: any): void {
 }
 
 public saveHandler({ sender, rowIndex, formGroup,isNew }: any): void {
+  
+  if (formGroup.invalid) {
+    return;
+  }
   const user = formGroup.value;
 
   
   const formattedDob = this.formatDateForBackend(user.dob);
   user.dob = formattedDob;
 
-  if (user.hobbyName && Array.isArray(user.hobbyName)) {
-    user.hobbyId = user.hobbyName.join(',');
+  if (user.hobbyName && Array.isArray(user.hobbyName)) {            // if hobbyname is not array set hobbyid to empty string
+    user.hobbyId = user.hobbyName.join(',');                     //convert hobbynam into id
   } else {
     user.hobbyId = '';
   }
@@ -143,9 +149,27 @@ public confirmRemove(confirm: boolean): void {
 
 
 
+public selectedKeys: number[] = []; 
+ deleteSelectedUser(){
+  debugger
+  if(this.selectedKeys.length===0)return
+  this.userService.DeleteMultipleuserIngrid(this.selectedKeys).subscribe({
+    next: () => {
+      this.gridData = this.gridData.filter(user => !this.selectedKeys.includes(user.id));
+      this.getAssetData(); // Refresh the grid
+      this.selectedKeys = []; // Clear selection
+    },
+    error: (err) => {
+      console.error("Error deleting users:", err);
+    }
+  });
+ }
+
 
 
 public buttonCount = 2;
 public sizes = [10, 20, 50];
-
+navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
 }

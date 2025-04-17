@@ -176,6 +176,8 @@ public confirmRemove(confirm: boolean): void {
 
 public buttonCount = 2;
 public sizes = [10, 20, 50];
-
+navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
 }
 

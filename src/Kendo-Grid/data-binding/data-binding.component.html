@@ -1,4 +1,5 @@
-UserInformation
+<h1 class="centered-text">InCell Edit Grid</h1>
+<button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 
 <kendo-grid
   [data]="gridview"
@@ -120,13 +121,19 @@ UserInformation
 
 <kendo-grid-excel fileName="UserList.xlsx"></kendo-grid-excel>
 
-  <kendo-grid-command-column title="Command" [width]="20">
-    <ng-template kendoGridCellTemplate let-isNew="isNew">
-      <button kendoGridRemoveCommand >Remove</button>
-      <button kendoGridSaveCommand [primary]="true">Save</button>
-      <button kendoGridCancelCommand>Cancel</button>
-    </ng-template>
-  </kendo-grid-command-column>
+<kendo-grid-command-column title="Command" [width]="20">
+  <ng-template kendoGridCellTemplate let-isNew="isNew" let-formGroup="formGroup">
+    <button kendoGridRemoveCommand>Remove</button>
+    <button kendoGridSaveCommand 
+        [disabled]="formGroup?.invalid || formGroup?.pristine" 
+        [primary]="true">
+  Save
+</button>
+
+    <button kendoGridCancelCommand>Cancel</button>
+  </ng-template>
+</kendo-grid-command-column>
+
   
   
   <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">

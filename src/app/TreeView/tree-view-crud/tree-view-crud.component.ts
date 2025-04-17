@@ -261,7 +261,9 @@ OnLogout() {
   this.router.navigate(['/Login']);
 }
 
-
+navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
 
 }
 

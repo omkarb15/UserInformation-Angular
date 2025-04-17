@@ -265,6 +265,8 @@ private formatDateForBackend(date: Date): string {
 //   this.loadItems();
 // }
 
-
+navigateToWelcomePage(){
+  this.router.navigate(['/Welcome'])
+  }
 
 }

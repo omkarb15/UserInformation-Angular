@@ -2,7 +2,8 @@
 <div
 
 >
-
+<h1 class="centered-text">InLine Edit Grid</h1>
+<button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 <kendo-grid
 [kendoGridBinding]="gridData"
 [kendoGridReactiveEditing]="reactiveFormGroup"
@@ -18,13 +19,19 @@
 (save)="saveHandler($event)"
 (remove)="removeHandler($event)"
 [navigable]="true"
-[rowReorderable]="true"
+[selectable]="{checkboxOnly:true, mode:'multiple'}"
+kendoGridSelectBy="id"
+[(selectedKeys)]="selectedKeys"
+
 >
+
+
 <ng-template kendoGridToolbarTemplate>
 <button kendoGridAddCommand  [primary]="true">Add New  </button>
+<button class="btn btn-danger" (click)="deleteSelectedUser()"> Delete</button>
 </ng-template>
 
-<kendo-grid-rowreorder-column [width]="40"> </kendo-grid-rowreorder-column>
+<kendo-grid-checkbox-column [width]="5"></kendo-grid-checkbox-column>
 <kendo-grid-column title="Sr. No." [width]="10" >
     <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
       {{  rowIndex + 1 }}

@@ -3,4 +3,8 @@
     font-family: "WebComponentsIcons", "KendoUI", "Arial", sans-serif !important;
     font-size: 16px;
   }
-  
+  .centered-text {
+    text-align: center; /* Centers the text horizontally */
+    color: #007bff;     /* Set your desired color here (e.g., blue) */
+    font-size: 2rem;     /* You can adjust the size as needed */
+  }

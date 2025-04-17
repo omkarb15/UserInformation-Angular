@@ -1,5 +1,7 @@
 
 <div class="container">
+  <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
+
     <Div class="text-center m-2 " ><h2 class="bg-primary">User Form</h2></Div>
       <form Class="row g-3" [formGroup]="userForm" (ngSubmit)="onUserSave(fileInput)">
         <div class="col-md-3">
