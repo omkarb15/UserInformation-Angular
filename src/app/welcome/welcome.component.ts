@@ -71,6 +71,9 @@ kendoGridDragDrop(){
 gridWithRadioButton(){
   this.router.navigate(['/RadioButtonWithGrid'])
 }
+ChartIntegration(){
+  this.router.navigate(['/ChartIntegration'])
+}
 
 OnLogout() {
   localStorage.clear();

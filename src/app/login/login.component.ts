@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
 
 
 
@@ -10,7 +11,8 @@ import { UserService } from '../user.service';
   selector: 'app-login',
   imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent {
   LoginForm:FormGroup= new FormGroup({
@@ -20,7 +22,7 @@ export class LoginComponent {
     })
     userData:any;
 
-constructor(private userService: UserService, private router: Router) {}
+constructor(private userService: UserService, private router: Router, private authService:AuthService) {}
 
 
 ngOnInit() {
@@ -38,8 +40,10 @@ OnLogin() {
     this.userService.login(credentials).subscribe({
       next: (response: any) => {
         debugger
+        console.log("API Response:", response);
    // this.userData=response
         alert("Login Successful");
+        this.authService.saveToken(response.token)
         console.log("API Response:", response); 
         //localStorage.removeItem("userData")
        // localStorage.setItem("userData" ,this.userData)

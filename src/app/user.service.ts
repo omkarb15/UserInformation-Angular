@@ -162,7 +162,7 @@ updateStatus(id: number, discontinued: boolean): Observable<any> {
 }
 DeleteMultipleuserIngrid(userIds: number[]): Observable<any> {
   return this.http.post(`${this.apiurl}/DeleteUsers`, userIds);
-}
+} 
 
 
   }

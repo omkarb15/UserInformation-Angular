@@ -17,6 +17,7 @@ import { RowreOrderingComponent } from '../Kendo-Grid/rowre-ordering/rowre-order
 import { DragDropBetGridComponent } from '../Kendo-Grid/drag-drop-bet-grid/drag-drop-bet-grid.component';
 import { RadioButtonComponent } from '@progress/kendo-angular-inputs';
 import { RadioButtonWithGridComponent } from '../Kendo-Grid/radio-button-with-grid/radio-button-with-grid.component';
+import { ChartIntegrationComponent } from '../Kendo-Grid/chart-integration/chart-integration.component';
 
 
 export const routes: Routes = [
@@ -97,6 +98,10 @@ export const routes: Routes = [
     {
         path:'RadioButtonWithGrid',
         component:RadioButtonWithGridComponent
+    },
+    {
+        path:"ChartIntegration",
+        component:ChartIntegrationComponent
     }
 ];
 

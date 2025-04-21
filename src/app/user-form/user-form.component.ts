@@ -79,6 +79,7 @@ export class UserFormComponent implements OnInit {
   }
 
   onUserSave(fileInput: HTMLInputElement) {
+    debugger
     if (this.userForm.valid) {
       const user = this.userForm.value;
       user.HobbyId = this.userForm.value.HobbyId ? this.userForm.value.HobbyId.map(String).join(',') : ''; // convert it into comma separeted value before saving

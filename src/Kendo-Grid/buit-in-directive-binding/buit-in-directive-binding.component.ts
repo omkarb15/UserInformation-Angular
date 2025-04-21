@@ -18,6 +18,7 @@ export class BuitInDirectiveBindingComponent  implements OnInit{
 
   constructor (private  userService:UserService, private router:Router, private formBuilder:FormBuilder){}
   ngOnInit(): void {
+
     this.getAssetData()
   }
 public gridData:any[]=[]
@@ -38,6 +39,9 @@ this.gridData = data.map((item: any) => {
 });
   })
 }
+
+
+
 public reactiveFormGroup = (args: { dataItem?: any; isNew: boolean }): FormGroup => {
   const item = args.isNew ? {} : args.dataItem;
   return this.formBuilder.group({
@@ -56,6 +60,9 @@ public reactiveFormGroup = (args: { dataItem?: any; isNew: boolean }): FormGroup
    
   });
 }
+
+
+
 public genderOptions = [
   { text: 'Male', value: 'Male' },
   { text: 'Female', value: 'Female' }
@@ -152,12 +159,14 @@ public confirmRemove(confirm: boolean): void {
 public selectedKeys: number[] = []; 
  deleteSelectedUser(){
   debugger
-  if(this.selectedKeys.length===0)return
+  if(this.selectedKeys.length===0)return                                               //if no keys selected  function exist immediately
+const confirmDelete=confirm(`Are you sure you want to delete this  ${this.selectedKeys} user(s) ??`)
+if(!confirmDelete)return
   this.userService.DeleteMultipleuserIngrid(this.selectedKeys).subscribe({
     next: () => {
       this.gridData = this.gridData.filter(user => !this.selectedKeys.includes(user.id));
-      this.getAssetData(); // Refresh the grid
-      this.selectedKeys = []; // Clear selection
+      this.getAssetData(); 
+      this.selectedKeys = []; 
     },
     error: (err) => {
       console.error("Error deleting users:", err);
@@ -171,5 +180,9 @@ public buttonCount = 2;
 public sizes = [10, 20, 50];
 navigateToWelcomePage(){
   this.router.navigate(['/Welcome'])
+  }
+  OnLogout() {
+    localStorage.clear();
+    this.router.navigate(['/Login']);
   }
 }

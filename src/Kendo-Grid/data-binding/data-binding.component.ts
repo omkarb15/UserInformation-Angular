@@ -204,7 +204,10 @@ private formatDateForBackend(date: Date): string {
 }
 
 
-
+OnLogout() {
+  localStorage.clear();
+  this.router.navigate(['/Login']);
+}
 
 
 

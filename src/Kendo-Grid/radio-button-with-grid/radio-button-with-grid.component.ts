@@ -36,11 +36,14 @@ userAnswers: { [key: number]: number } = {}; // key: questionId, value: optionId
   
   }
   submitAnswers() {
+    debugger
     const answers = this.questions.map(q => ({
       userId: this.userId,
       questionId: q.questionId,
       optionId: this.userAnswers[q.questionId]
-    })).filter(ans => ans.optionId !== undefined);
+    })).filter(ans => ans.optionId !== undefined);             //only answered questions are included in the answers array.
+
+
   
     if (answers.length === 0) {
       alert("Please select answers before submitting.");
@@ -50,24 +53,31 @@ userAnswers: { [key: number]: number } = {}; // key: questionId, value: optionId
     this.userService.SubmitOptionAnswer(answers).subscribe({
       next: (response: any) => {
         console.log("Response", response);
-        alert("Answers submitted successfully!");
+        alert("Answers submitted successfully!")
       },
       error: (error) => {
-        console.error("Submit failed:", error);
+        console.error("Submit failed:", error)
         alert("Error submitting answers.");
       }
     });
   }
   getUserans() {
+    debugger
     this.userService.getUserans(this.userId).subscribe({
       next: (Data: any) => {
-        console.log("Data: ", Data);
+        console.log("Data: ", Data)
         Data.forEach((answer: any) => {
           this.userAnswers[answer.questionId] = answer.optionId;
         });
       }
     });
   }
-  
+  navigateToWelcomePage(){
+    this.router.navigate(['/Welcome'])
+    }
+    OnLogout() {
+      localStorage.clear();
+      this.router.navigate(['/Login']);
+    }
 
 }

@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
     "@progress/kendo-angular-buttons": "18.2.0",
+    "@progress/kendo-angular-chart-wizard": "^18.5.1",
+    "@progress/kendo-angular-charts": "^18.5.1",
     "@progress/kendo-angular-common": "18.2.0",
     "@progress/kendo-angular-dateinputs": "18.2.0",
     "@progress/kendo-angular-dialog": "18.2.0",

@@ -2,9 +2,11 @@
 
 
 
-<button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
+
 
 <div class="container">
+  <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
+<button class="btn btn-danger m-2" (click)="OnLogout()">Logout</button>
     <h2  class="bg-secondary text-white p-2">Answer Given Questions</h2>
     <br>
     <div *ngFor="let question of questions" class="mb-4">
@@ -17,6 +19,6 @@
         
       </div>
       <button class="btn btn-success " (click)="submitAnswers()">Submit</button>
-      <button class="btn btn-danger ms-2" (click)="OnLogout()">Logout</button>
+    
 
 </div>

@@ -1,6 +1,7 @@
 
 <div class="container">
   <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
+  <button class="btn btn-danger m-2" (click)="OnredirectToLogin()">LogOut </button>
 
     <Div class="text-center m-2 " ><h2 class="bg-primary">User Form</h2></Div>
       <form Class="row g-3" [formGroup]="userForm" (ngSubmit)="onUserSave(fileInput)">
@@ -86,7 +87,7 @@
     </div>
 
     <div class="mt-3">
-        <button class="btn btn-danger" (click)="OnredirectToLogin()">LogOut </button>
+
     </div>
     
     

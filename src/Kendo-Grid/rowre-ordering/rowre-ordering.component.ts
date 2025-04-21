@@ -56,5 +56,10 @@ onRowReorder(event: any): void {
 navigateToWelcomePage(){
   this.router.navigate(['/Welcome'])
   }
-
+  OnLogout() {
+    localStorage.clear();
+    this.router.navigate(['/Login']);
+  }
+  
+  
 }

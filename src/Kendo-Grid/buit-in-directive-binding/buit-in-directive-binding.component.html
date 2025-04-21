@@ -1,12 +1,15 @@
-
+<!-- [kendoGridReactiveEditing]="reactiveFormGroup" -->
 <div
 
 >
 <h1 class="centered-text">InLine Edit Grid</h1>
 <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
+<button class="btn btn-danger " (click)="OnLogout()">LogOut</button>
 <kendo-grid
 [kendoGridBinding]="gridData"
-[kendoGridReactiveEditing]="reactiveFormGroup"
+
+
+
 [pageSize]="50"
 [pageable]="true"
 [sortable]="true"
@@ -18,6 +21,7 @@
 (cancel)="cancelHandler($event)"
 (save)="saveHandler($event)"
 (remove)="removeHandler($event)"
+[kendoGridReactiveEditing]="reactiveFormGroup"
 [navigable]="true"
 [selectable]="{checkboxOnly:true, mode:'multiple'}"
 kendoGridSelectBy="id"
@@ -28,10 +32,10 @@ kendoGridSelectBy="id"
 
 <ng-template kendoGridToolbarTemplate>
 <button kendoGridAddCommand  [primary]="true">Add New  </button>
-<button class="btn btn-danger" (click)="deleteSelectedUser()"> Delete</button>
+<button class="btn btn-danger" (click)="deleteSelectedUser()"   [disabled]="selectedKeys.length === 0"> Delete</button>
 </ng-template>
 
-<kendo-grid-checkbox-column [width]="5"></kendo-grid-checkbox-column>
+<kendo-grid-checkbox-column [width]="5" [showSelectAll]="true"></kendo-grid-checkbox-column>
 <kendo-grid-column title="Sr. No." [width]="10" >
     <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
       {{  rowIndex + 1 }}
@@ -101,12 +105,12 @@ kendoGridSelectBy="id"
   
 
   <kendo-grid-command-column title="Action" [width]="20">
-    <ng-template kendoGridCellTemplate let-isNew="isNew" let-editFormGroup="editFormGroup">
+    <ng-template kendoGridCellTemplate let-isNew="isNew" let-formGroup="formGroup">
       <button kendoGridEditCommand [primary]="true">Edit</button>
       <button kendoGridRemoveCommand>Remove</button>
       <button 
         kendoGridSaveCommand 
-        [disabled]="editFormGroup?.invalid"
+        [disabled]="formGroup?.invalid"
       >
         {{isNew ? "Add" : "Update"}}
       </button>

@@ -1,0 +1,38 @@
+<h1 class="centered-text">Chart Integration</h1>
+<div class="example-config">
+    <strong
+      >Select rows and click the "Chart of Selected Data" button.</strong
+    >
+  </div>
+
+  @if (wizardVisible) {
+  <kendo-chartwizard [data]="wizardData" (close)="wizardVisible = false">
+  </kendo-chartwizard>
+  }
+
+  <kendo-grid
+    [kendoGridBinding]="data"
+    [sortable]="true"
+    [sort]="sort"
+    [kendoGridSelectBy]="selectionKey"
+    [selectable]="selectionSettings"
+    [(selectedKeys)]="mySelection"
+    kendoChartWizardGridBinding
+    [(chartWizardData)]="wizardData"
+    [style.height.px]="500"
+  >
+    <ng-template kendoGridToolbarTemplate>
+      <button
+        kendoButton
+     
+        [disabled]="!hasSelection"
+        (click)="wizardVisible = true"
+      >
+        Chart of Selected Data
+      </button>
+    </ng-template>
+    <kendo-grid-column field="Product" title="Product Name" />
+    <kendo-grid-column field="Price" title="Price" />
+    <kendo-grid-column field="Tax" title="Tax" />
+    <kendo-grid-column field="Total" title="Total" />
+  </kendo-grid>

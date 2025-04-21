@@ -1,7 +1,7 @@
 <div class="container">
 <h2>{{ gender }} Questions</h2>
 <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
-
+<button class="btn btn-primary m-2 " (click)="OnLogin()">LogOut</button>
   
 <form>
     <div *ngFor="let question of questions; ">
@@ -23,7 +23,7 @@
 <!-- 
 <h3>Questions Answered: {{ totalAnswered }}/{{questions.length}}</h3> -->
 
-<button class="btn btn-primary mt-2 " (click)="OnLogin()">Redirect To Login</button>
+
 
 
 
