@@ -1,9 +1,10 @@
 import { Component, input, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule, RequiredValidator, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 
 export function noWhitespaceValidator():ValidatorFn{
@@ -44,11 +45,17 @@ selectedFile: File | null = null;
 userList: any[] = [];
 HobbyList: any[]=[]
 
-constructor(private userservice: UserService) {}
+constructor(private userservice: UserService , private router:Router, private authservice:AuthService) {}
 
 ngOnInit() {
-  this.getUsers();
-  this.getHobbies()
+  if(!this.authservice.isloggedIn()){
+    this.router.navigate(['/Login'])
+  }
+  else{
+    this.getUsers();
+    this.getHobbies();
+  }
+ 
 }
 
 getHobbies(){

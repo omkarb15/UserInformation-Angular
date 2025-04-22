@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, React
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 export function noWhitespaceValidator(): ValidatorFn {
   return (control: AbstractControl) => {
@@ -37,11 +38,17 @@ export class UserFormComponent implements OnInit {
   userList: any[] = [];
   HobbyList: any[] = [];
 
-  constructor(private userservice: UserService, private router: Router) {} 
+  constructor(private userservice: UserService, private router: Router , private authservice:AuthService) {} 
 
   ngOnInit() {
-    this.getUsers();
-    this.getHobbies();
+    if(!this.authservice.isloggedIn()){
+      this.router.navigate(['/Login'])
+    }
+    else{
+      this.getUsers();
+      this.getHobbies();
+    }
+   
   }
 
   getHobbies() {

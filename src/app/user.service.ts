@@ -1,16 +1,18 @@
-  import { HttpClient } from '@angular/common/http';
+  import { HttpClient, HttpHeaders } from '@angular/common/http';
   import { Injectable } from '@angular/core';
   import { Observable } from 'rxjs';
 import { UserAnswer } from './user-answer';
+import { AuthService } from './auth.service';
 
   @Injectable({
     providedIn: 'root'
   })
   export class UserService {
   private apiurl= "http://localhost:5244/api/Users"
-    constructor(private http:HttpClient) { }
+    constructor(private http:HttpClient, private authservice:AuthService ) { }
 
     getUsers(): Observable<any>{
+ 
       return this.http.get<any>(this.apiurl);
     }
 
@@ -86,6 +88,7 @@ import { UserAnswer } from './user-answer';
     }
     
     SubmitAnswer(answer: UserAnswer[]): Observable<any> {
+      debugger
       return this.http.post<any>(`${this.apiurl}/SubmitAnswer`, answer, {
        
       });

@@ -12,7 +12,7 @@ import { AuthService } from '../auth.service';
   imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent {
   LoginForm:FormGroup= new FormGroup({
