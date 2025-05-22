@@ -7,6 +7,7 @@ export const interceptorAuthInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.getToken();
 
   if (token && !req.url.includes('/Login')) {
+
     const clonedRequest = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
@@ -15,5 +16,5 @@ export const interceptorAuthInterceptor: HttpInterceptorFn = (req, next) => {
     return next(clonedRequest);
   }
 
-  return next(req);
+  return next(req)
 };

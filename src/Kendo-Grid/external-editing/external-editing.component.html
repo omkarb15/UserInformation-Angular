@@ -2,6 +2,12 @@
 <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 <button class="btn btn-danger m-2" (click)="OnLogout()">LogOut</button>
 
+<div *ngIf="Loading" class="loader-container" style="text-align: center;padding: 50px;">
+  <kendo-loader [type]="loderType" [size]="'large'" [themeColor]="'secondary'" ></kendo-loader>
+</div>
+
+
+<div *ngIf="!Loading">
 <kendo-grid 
 
 [kendoGridBinding]="gridData"
@@ -185,6 +191,8 @@ multi-pager grid with automatic page breaking
   </kendo-dialog-actions>
 </kendo-dialog>
 
+
+</div>
 
 
 

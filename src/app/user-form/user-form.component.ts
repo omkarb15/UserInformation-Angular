@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { SharedComponentComponent } from '../shared-component/shared-component.component';
 
 export function noWhitespaceValidator(): ValidatorFn {
   return (control: AbstractControl) => {
@@ -15,7 +16,7 @@ export function noWhitespaceValidator(): ValidatorFn {
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, SharedComponentComponent],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
 })
@@ -58,6 +59,7 @@ export class UserFormComponent implements OnInit {
   }
 
   getUsers() {
+    debugger
     this.userservice.getUsers().subscribe((response) => {
       console.log(response);
       this.userList = response;

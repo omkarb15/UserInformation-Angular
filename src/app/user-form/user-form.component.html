@@ -141,6 +141,14 @@
          </tbody>
        
       </table>
+      <div class="d-flex flex-wrap" >
+        <app-shared-component
+        *ngFor="let user of userList let i=index"
+       [user]="user"                 
+        (onDelete)="deleteUser($event)"  
+        [index]="i"  
+        ></app-shared-component>
+      </div>
     
     
     </div> 

@@ -6,16 +6,19 @@ import { FormsModule } from '@angular/forms';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { CommonModule } from '@angular/common';
 import { LabelModule } from "@progress/kendo-angular-label";
+import { LoaderModule, LoaderType } from '@progress/kendo-angular-indicators';
 
 @Component({
   selector: 'app-radio-button-with-grid',
-  imports: [KENDO_GRID, GridModule,FormsModule ,InputsModule, CommonModule, LabelModule],
+  imports: [KENDO_GRID, GridModule,FormsModule ,InputsModule,LoaderModule, CommonModule, LabelModule],
   templateUrl: './radio-button-with-grid.component.html',
   styleUrl: './radio-button-with-grid.component.css'
 })
 export class RadioButtonWithGridComponent implements OnInit {
 userId:any
 questions:any[]=[]
+public Loading:boolean=true
+public loadertype:LoaderType='pulsing'
 userAnswers: { [key: number]: number } = {}; // key: questionId, value: optionId
 
  constructor(private userService: UserService, private router: Router) {
@@ -27,12 +30,16 @@ userAnswers: { [key: number]: number } = {}; // key: questionId, value: optionId
   }
 
   loadQuestion(){
+    this.Loading=true
     debugger
     this.userService.GetQuestion().subscribe((data)=>{
       this.questions=data
       console.log("Questions", this.questions)
 
     })
+    setTimeout(() => {
+      this.Loading=false
+    }, 1500);
   
   }
   submitAnswers() {

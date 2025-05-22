@@ -2,6 +2,11 @@
 <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 <button class="btn btn-danger m-2" (click)="OnLogout()">LogOut</button>
 
+<div *ngIf="loading" class="loader-container " style="text-align: center;padding: 50px;">
+  <kendo-loader [type]="loaderType" [size]="'large'" [themeColor]="'primary'" ></kendo-loader>
+</div>
+
+<div *ngIf="!loading">
 <kendo-grid
   [data]="gridview"
   [pageSize]="state.take"
@@ -165,6 +170,10 @@
   </kendo-dialog-actions>
 </kendo-dialog>
   
+
+</div>
+
+
    
    
    

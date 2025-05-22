@@ -88,7 +88,7 @@ public expandedKeys:string[]=["0","0_0"]
 
  onNodeDrop(event: TreeItemDragEvent){
   debugger
-  console.log("dragand drop event",event)
+  console.log("drag and drop event",event)
   const draggedItem=event.sourceItem?.item?.dataItem
   const NewParent=event.destinationItem?.item?.dataItem
 if(!draggedItem){
@@ -177,6 +177,7 @@ selectedNode:any=null
 contextItem:any=null
 
 public onNodeClick(event: NodeClickEvent, treeMenu: ContextMenuComponent): void {
+  debugger
   if (event.type === "contextmenu" && event.item && event.item.dataItem) {  // Ensure right-click on a node
     const originalEvent = event.originalEvent;
     originalEvent.preventDefault(); 
@@ -198,10 +199,12 @@ public tempNodeName:string=""
 
 
 onContextMenuSelect(event:ContextMenuSelectEvent){
+  debugger
   const action=event.item.text
   console.log("Context Menu Action", action)
 
   switch(action){   
+    
     case 'Add Child Node':
       if (this.selectedNodeId !== null) {
         this.isAddingNodeId = this.selectedNodeId; 

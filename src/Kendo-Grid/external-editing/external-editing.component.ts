@@ -7,11 +7,11 @@ import { KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
 import { GridModule, KENDO_GRID, RowClassArgs } from '@progress/kendo-angular-grid';
 import { CommonModule } from '@angular/common';
 import { fileExcelIcon, filePdfIcon, SVGIcon } from '@progress/kendo-svg-icons';
-import { KENDO_INDICATORS } from "@progress/kendo-angular-indicators";
+import { KENDO_INDICATORS, LoaderType } from "@progress/kendo-angular-indicators";
 import { KENDO_TOOLBAR } from "@progress/kendo-angular-toolbar";
 @Component({
   selector: 'app-external-editing',
-   imports: [KENDO_GRID,CommonModule,GridModule,FormsModule,KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG,KENDO_INDICATORS,KENDO_TOOLBAR],
+   imports: [KENDO_GRID,CommonModule,GridModule,CommonModule, FormsModule,KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG,KENDO_INDICATORS,KENDO_TOOLBAR],
   templateUrl: './external-editing.component.html',
   styleUrl: './external-editing.component.css',
   encapsulation: ViewEncapsulation.None,
@@ -22,6 +22,8 @@ ngOnInit(): void {
   this.getAssetData()
 }
 public gridData:any[]=[]
+public Loading:boolean=true
+public loderType:LoaderType="infinite-spinner"
 public formGroup!:FormGroup
 public editedRowIndex:number|undefined
 public filepdfIcon:SVGIcon=filePdfIcon
@@ -30,6 +32,7 @@ public filExcelIcon:SVGIcon=fileExcelIcon
 
 
 getAssetData(){
+  this.Loading=true
   this.userService.getUsers().subscribe((data)=>{
 this.gridData=data
 console.log("userInformation", data)
@@ -40,6 +43,9 @@ this.gridData = data.map((item: any) => {
     hobbyName: item.hobbyId ? item.hobbyId.split(',') : [] 
   };
 });
+setTimeout(() => {
+  this.Loading=false
+}, 1500);
   })
 }
 

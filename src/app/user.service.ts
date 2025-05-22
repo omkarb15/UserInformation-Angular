@@ -166,6 +166,25 @@ updateStatus(id: number, discontinued: boolean): Observable<any> {
 DeleteMultipleuserIngrid(userIds: number[]): Observable<any> {
   return this.http.post(`${this.apiurl}/DeleteUsers`, userIds);
 } 
+getSalesData():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/GetSalesData`)
+}
+getStackedChart():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/GetStackChart`)
 
+}
+getStackchartDto():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/GetStackChartDto`)
+}
+getPieChart():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/GetPieChart`)
+}
 
+getSankeychart():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/SankeyChart`)
+}
+
+getColumnLine():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/ColumnLine`)
+}
   }

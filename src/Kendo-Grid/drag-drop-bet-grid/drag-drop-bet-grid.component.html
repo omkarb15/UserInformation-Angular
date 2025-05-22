@@ -3,6 +3,11 @@
 <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 <button class="btn btn-danger m-2" (click)="OnLogout()" >Logout</button>
 
+<div *ngIf="loading" class="loader-container" style="text-align: center;padding: 50px;">
+  <kendo-loader [type]="loadertype" [size]="'large'" [themeColor]="'tertiary'"></kendo-loader>
+</div>
+
+<div *ngIf="!loading">
 <link
   rel="stylesheet"
   href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css"
@@ -68,3 +73,7 @@
     </kendo-grid-column>
   </kendo-grid>
 </div>
+
+
+</div>
+

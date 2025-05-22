@@ -5,11 +5,12 @@
 <h1 class="centered-text">InLine Edit Grid</h1>
 <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 <button class="btn btn-danger " (click)="OnLogout()">LogOut</button>
+<div *ngIf="loader" class="loader-container" style="text-align: center; padding: 50px;">
+  <kendo-loader [type]="loaderType" [size]="'large'" [themeColor]="'secondary'"></kendo-loader>
+</div>
+<div *ngIf="!loader">
 <kendo-grid
 [kendoGridBinding]="gridData"
-
-
-
 [pageSize]="50"
 [pageable]="true"
 [sortable]="true"
@@ -146,6 +147,9 @@ kendoGridSelectBy="id"
 </kendo-dialog>
 
 </div>
+</div>
+
+
 
 
 

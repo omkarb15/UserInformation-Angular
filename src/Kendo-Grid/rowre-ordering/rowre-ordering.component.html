@@ -3,6 +3,12 @@
 <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
 <button class="btn btn-danger m-2" (click)="OnLogout()">Logout</button>
 
+<div *ngIf="Loading" class="loader-container" style="text-align: center;padding: 50px;"
+>
+<kendo-loader [type]="Loadertype" [size]="'large'" [themeColor]="'primary'"></kendo-loader>
+</div>
+
+<div *ngIf="!Loading">
 <kendo-grid
 [kendoGridBinding]="gridData"
 [pageable]="true"
@@ -26,3 +32,5 @@
 <kendo-grid-column field="city" title="City"></kendo-grid-column>
 
 </kendo-grid>
+
+</div>

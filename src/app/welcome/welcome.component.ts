@@ -74,7 +74,27 @@ gridWithRadioButton(){
 ChartIntegration(){
   this.router.navigate(['/ChartIntegration'])
 }
+sharedComponent(){
+  this.router.navigate(['/sharedCompoent'])
+}
+AM5chartComponent(){
+  this.router.navigate(['/Am5 Chart'])
 
+}
+XYChart(){
+  this.router.navigate(['/XY Chart'])
+}
+StackedChart(){
+  this.router.navigate(['/StakedChart'])
+}
+
+pieChart(){
+  this.router.navigate(['/PieChart'])
+}
+
+sankeyChart(){
+  this.router.navigate(['/SankeyChart'])
+}
 OnLogout() {
   localStorage.clear();
   this.router.navigate(['/Login']);

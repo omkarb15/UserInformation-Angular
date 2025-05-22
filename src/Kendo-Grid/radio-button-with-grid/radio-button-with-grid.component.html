@@ -5,9 +5,13 @@
   <button class="btn btn-success m-2 " (click)="navigateToWelcomePage()">← BACK</button>
   <button class="btn btn-danger m-2" (click)="OnLogout()">LogOut</button>
   <h2 class="bg-secondary text-white p-2">Answer Given Questions</h2>
-
+<div *ngIf="Loading" class="loader-container" style="text-align: center; padding: 50px;">
+  <kendo-loader [type]="loadertype" [size]="'large'" [themeColor]="'tertiary'"></kendo-loader>
+</div>
   
-  <kendo-grid 
+
+<div *ngIf="!Loading">
+<kendo-grid 
   [data]="questions" 
   [scrollable]="'scrollable'" 
   [height]="500">
@@ -28,9 +32,6 @@
             [value]="option.optionId"
             [(ngModel)]="userAnswers[dataItem.questionId]"
             ></kendo-radiobutton>
-            
-            
-            
             {{ option.optionText }}
          </kendo-label>
          
@@ -46,3 +47,6 @@
     <!-- <button class="btn btn-danger ms-2" (click)="OnLogout()">Logout</button> -->
   </div>
 </div>
+
+</div>
+  

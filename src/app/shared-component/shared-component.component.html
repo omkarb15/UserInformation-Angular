@@ -1,0 +1,9 @@
+shared component
+<div class="card" *ngIf="user">
+<h4>{{index+1}}. {{user.firstName}}{{user.surName}}</h4>
+
+<h3>Gender:{{user.gender}}</h3>
+<button (click)="deleteUser()">Delete User</button>
+</div>
+
+

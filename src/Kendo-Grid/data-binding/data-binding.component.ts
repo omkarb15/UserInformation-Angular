@@ -15,9 +15,10 @@ import { KENDO_DROPDOWNLIST, KENDO_DROPDOWNS } from "@progress/kendo-angular-dro
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Keys } from '@progress/kendo-angular-common';
 import { fileExcelIcon, filePdfIcon, SVGIcon } from '@progress/kendo-svg-icons';
+import { LoaderModule, LoaderType } from '@progress/kendo-angular-indicators';
 @Component({
   selector: 'app-data-binding',
-  imports: [KENDO_GRID, CommonModule,GridModule, KENDO_DROPDOWNLIST, FormsModule, KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG],
+  imports: [KENDO_GRID, CommonModule,GridModule, KENDO_DROPDOWNLIST, FormsModule,LoaderModule, KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG],
   templateUrl: './data-binding.component.html',
   styleUrl: './data-binding.component.css'
 })
@@ -33,6 +34,8 @@ public gridview!:GridDataResult
 public skip=0
 public pageSize=5
 public editForm!: FormGroup;
+public loading:boolean=true
+public loaderType:LoaderType="converging-spinner"
 public buttonCount = 2;
 public sizes = [10, 20, 50];
 public fileExcelIcon:SVGIcon=fileExcelIcon
@@ -68,6 +71,7 @@ private createFormGroup(dataItem:any):FormGroup{
 }
 
 getAssetData() {
+  this.loading=true
   this.userService.getUsers().subscribe((data) => {
     console.log("User Information", data);
     
@@ -79,7 +83,11 @@ getAssetData() {
       };
     });
 
-    this.loadItems();
+  this.loadItems();
+  setTimeout(()=>{
+  this.loading=false
+  },1500)
+  
   });
 }
 

@@ -18,6 +18,14 @@ import { DragDropBetGridComponent } from '../Kendo-Grid/drag-drop-bet-grid/drag-
 import { RadioButtonComponent } from '@progress/kendo-angular-inputs';
 import { RadioButtonWithGridComponent } from '../Kendo-Grid/radio-button-with-grid/radio-button-with-grid.component';
 import { ChartIntegrationComponent } from '../Kendo-Grid/chart-integration/chart-integration.component';
+import { SharedComponentComponent } from './shared-component/shared-component.component';
+import { AmChartComponent } from './am-chart/am-chart.component';
+import { XYChart } from '@amcharts/amcharts5/xy';
+import { XYChartComponent } from './AmCharts/xychart/xychart.component';
+import { StackedChartComponent } from './AmCharts/stacked-chart/stacked-chart.component';
+import { PieChartsComponent } from './AmCharts/pie-charts/pie-charts.component';
+import { SankeyComponent } from '@progress/kendo-angular-charts';
+import { SankeyChartComponent } from './AmCharts/sankey-chart/sankey-chart.component';
 
 
 export const routes: Routes = [
@@ -102,6 +110,30 @@ export const routes: Routes = [
     {
         path:"ChartIntegration",
         component:ChartIntegrationComponent
+    },
+    {
+        path:'sharedCompoent',
+        component:SharedComponentComponent
+    },
+    {
+        path:"Am5 Chart",
+        component:AmChartComponent
+    },
+    {
+      path:"XY Chart",
+      component:XYChartComponent
+    },
+    {
+        path:"StakedChart",
+        component:StackedChartComponent
+    },
+    {
+        path:'PieChart',
+        component:PieChartsComponent
+    },
+    {
+        path:'SankeyChart',
+        component:SankeyChartComponent
     }
 ];
 

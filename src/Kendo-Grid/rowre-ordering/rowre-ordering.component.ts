@@ -3,10 +3,12 @@ import { UserService } from '../../app/user.service';
 import { Router } from '@angular/router';
 import { KENDO_GRID } from '@progress/kendo-angular-grid';
 import { customers } from '../customers';
+import { LoaderModule, LoaderType } from '@progress/kendo-angular-indicators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-rowre-ordering',
-  imports: [KENDO_GRID],
+  imports: [KENDO_GRID , LoaderModule,CommonModule] ,
   templateUrl: './rowre-ordering.component.html',
   styleUrl: './rowre-ordering.component.css'
 })
@@ -14,14 +16,20 @@ export class RowreOrderingComponent implements OnInit {
 constructor(private userService:UserService, private router:Router){}
 
 public gridData:any[]=[]
+public Loading:boolean=true
+public Loadertype:LoaderType="infinite-spinner"
   ngOnInit(): void {
 this.getCustomer()
   }
 getCustomer(){
+  this.Loading=true
   this.userService.getCustomerRowReorder().subscribe((data)=>{
     this.gridData=data
     console.log("GetCustomer", this.gridData)
   })
+  setTimeout(() => {
+    this.Loading=false
+  }, 1500);
 }
 
 

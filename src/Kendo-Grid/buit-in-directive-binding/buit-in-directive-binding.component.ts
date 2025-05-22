@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { KENDO_DROPDOWNS } from '@progress/kendo-angular-dropdowns';
 import { KENDO_DIALOG } from "@progress/kendo-angular-dialog";
+import { LoaderModule, LoaderType } from '@progress/kendo-angular-indicators';
 
 @Component({
   selector: 'app-buit-in-directive-binding',
-  imports: [KENDO_GRID,CommonModule,GridModule,FormsModule,KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG],
+  imports: [KENDO_GRID,CommonModule,GridModule,LoaderModule, FormsModule,KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG],
   templateUrl: './buit-in-directive-binding.component.html',
   styleUrl: './buit-in-directive-binding.component.css'
 })
@@ -22,11 +23,14 @@ export class BuitInDirectiveBindingComponent  implements OnInit{
     this.getAssetData()
   }
 public gridData:any[]=[]
+public loader:boolean=true
+public loaderType:LoaderType="converging-spinner" 
 public formGroup!:FormGroup
 public editedRowIndex:number|undefined
 
 
 getAssetData(){
+  this.loader=true
   this.userService.getUsers().subscribe((data)=>{
 this.gridData=data
 console.log("userInformation", data)
@@ -37,7 +41,11 @@ this.gridData = data.map((item: any) => {
     hobbyName: item.hobbyId ? item.hobbyId.split(',') : [] 
   };
 });
+setTimeout(() => {
+this.loader=false
+}, 1500);
   })
+  
 }
 
 
