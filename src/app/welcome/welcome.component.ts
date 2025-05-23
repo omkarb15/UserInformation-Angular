@@ -95,6 +95,10 @@ pieChart(){
 sankeyChart(){
   this.router.navigate(['/SankeyChart'])
 }
+StudentBar(){
+  this.router.navigate(['/StudentBar'])
+}
+
 OnLogout() {
   localStorage.clear();
   this.router.navigate(['/Login']);

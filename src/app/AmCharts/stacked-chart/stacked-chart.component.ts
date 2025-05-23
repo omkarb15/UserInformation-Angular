@@ -80,7 +80,7 @@ xAxis.data.setAll(data);   //This binds the data array to the X-axis.The X-axis 
   }))
 
   
-  function makeSeries(name:string, field:string){
+  function makeSeries(name:string, field:string){      //   This function lets you re-use the logic to create multiple series dynamically.
     const series=chart.series.push(am5xy.ColumnSeries.new(root,{
       name:name,         //The name shown in the legend and tooltips.
       stacked:true,      //Enables stacking of this series on top of others in the same category
@@ -99,8 +99,8 @@ xAxis.data.setAll(data);   //This binds the data array to the X-axis.The X-axis 
     })
     series.bullets.push(()=>
       am5.Bullet.new(root,{
-        sprite:am5.Label.new(root,{
-      text: "{valueYTotalPercent.formatNumber('#.#')}%",
+        sprite:am5.Label.new(root,{          //A sprite in amCharts is any visual object (like a label, shape, or image) that can be drawn on the chart.  
+        text: "{valueYTotalPercent.formatNumber('#.#')}%",
           fill:root.interfaceColors.get("alternativeText"),
           centerX:am5.p50,
           centerY:am5.p50,
@@ -152,7 +152,7 @@ console.log("Product Keys:", productKeys);
      wheelX:"panY",
      wheelY:'zoomY',
      paddingLeft:0,
-     layout:barRoot.verticalLayout,
+     layout:barRoot.verticalLayout,       //Sets the layout to vertical. This means any additional elements (like legends, titles, axes) will be stacked vertically.
 
     })
   )
@@ -160,6 +160,7 @@ console.log("Product Keys:", productKeys);
   barChart.set("scrollbarY",am5.Scrollbar.new(barRoot,{
     orientation:'vertical'
   }))
+
 const yRenderer=am5xy.AxisRendererY.new(barRoot,{})
   const yAxis=barChart.yAxes.push(am5xy.CategoryAxis.new(barRoot,{
     categoryField:'region',
@@ -227,6 +228,8 @@ barChart.appear(1000,100)
 
  }
 
-
+naviagtetoWelcome(){
+  this.router.navigate(['/Welcome'])
+}
 
 }

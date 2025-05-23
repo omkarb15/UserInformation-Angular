@@ -1,29 +1,78 @@
-<h2 class="centered-text">Welcome!</h2><h2 class="centered-text"> {{ this.FirstName  }} {{ this.SurName  }}</h2>
-
+<h2 class="text-center">Welcome!</h2>
+<h2 class="text-center">{{ this.FirstName }} {{ this.SurName }}</h2>
 
 <div class="m-3">
-    <button class="btn btn-danger ms-2" (click)="OnLogout()" type="button">Logout</button>
-</div>
-<div class="d-flex gap-2 ms-2">
-    <button class="btn btn-success" (click)="OnuserForm()">AddUser</button>
-    <button class="btn btn-success" (click)="OnQuestion()">Questions</button>
-    <button class="btn btn-success" (click)="OnQuestionOption()">Questions With Options</button>
-    <button class="btn btn-success" (click)="treeViewCrudOperation()">TreeView Crud Operation</button>
-    <button class="btn btn-success "(click)="treeViewDragAndDrop()">TreeView Drag And Drop Operation</button>
-    <button class="btn btn-success" (click)="treeViewCheckBox()">TreeView CheckBox</button>
-
-    <button class="btn btn-success" (click)="KendoGridDataBinding()">Incell Editing In Grid</button>
-    <button class="btn btn-success" (click)="KendoGridBuitInBinding()"> Inline Editing </button>
-    <button class="btn btn-success" (click)="kendoGridExternalEditing()">Inline Edit On Row Click</button>
-    <button class="btn btn-success" (click)="KendoGridRowReorder()">RowReordering in Grid</button>
-    <button class="btn btn-success" (click)="kendoGridDragDrop()">Drag And Drop Between two Grids</button>
-    <button class="btn btn-success" (click)="gridWithRadioButton()">Radio Button In Grid</button>
-    <button class="btn btn-success" (click)="ChartIntegration()">Chart Integration</button>
-    <button class="btn btn-success" (click)="pieChart()">PieChart</button>
-    <button class="btn btn-success" (click)="AM5chartComponent()">AM 5 Chart</button>
-    <button class="btn btn-success" (click)="XYChart()">XY Chart</button>
-    <button class="btn btn-success" (click)="StackedChart()">100% Stacked Chart</button>
-    <button class="btn btn-success " (click)="sankeyChart()">Sankey Chart</button>
+  <button class="btn btn-danger" (click)="OnLogout()" type="button">Logout</button>
 </div>
 
+<div class="container">
+  <h3>1)User and TreeView Operations</h3>
     
+  <div class="row mb-3 g-2">
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="OnuserForm()">Add User</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="OnQuestion()">Questions</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="OnQuestionOption()">Questions With Options</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="treeViewCrudOperation()">TreeView CRUD</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="treeViewDragAndDrop()">TreeView Drag & Drop</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="treeViewCheckBox()">TreeView CheckBox</button>
+    </div>
+  </div>
+ <h3>2)Grid Operations</h3>
+  <!-- Grid Operations -->
+  <div class="row mb-3 g-2">
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="KendoGridDataBinding()">In-Cell Editing</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="KendoGridBuitInBinding()">Inline Editing</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="kendoGridExternalEditing()">Row Click Inline Edit</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="KendoGridRowReorder()">Row Reordering</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="kendoGridDragDrop()">Drag & Drop Grids</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="gridWithRadioButton()">Radio Button in Grid</button>
+    </div>
+  </div>
+<h3>3)Charting Options</h3>
+  <!-- Charting Options -->
+  <div class="row mb-3 g-2">
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="ChartIntegration()">Chart Integration</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="pieChart()">Pie Chart</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="AM5chartComponent()">AM5 Chart</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="XYChart()">XY Chart</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="StackedChart()">100% Stacked Chart</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="sankeyChart()">Sankey Chart</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="StudentBar()">Filter StudentsMarks on Bar Chart</button>
+    </div>
+  </div>
+</div>

@@ -100,4 +100,7 @@ legend.data.setAll(series.dataItems)
   donutLegend.data.setAll(donutSeries.dataItems)
   donutSeries.appear(1000,100)
   }
+  naviagtetoWelcome(){
+  this.router.navigate(['/Welcome'])
+}
 }

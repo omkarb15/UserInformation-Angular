@@ -139,6 +139,8 @@ barChart.set("scrollbarX", scrollbarX);
   barSeries.data.setAll(data);   //tells the chart what data to draw as bars (revenue per month).
  
   }
-
+naviagtetoWelcome(){
+  this.router.navigate(['/Welcome'])
+}
 
 }

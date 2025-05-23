@@ -1,0 +1,27 @@
+<button class="btn btn-success m-2" (click)="naviagtetoWelcome()">← Back</button>
+
+<div style="display: flex; gap: 20px;">
+
+  <div id="ChartDiv" style="width: 50%; height: 500px;"></div>
+
+
+  <div style="width: 50%;">
+    <button class="btn btn-success" (click)="resetGrid()">All Students</button>
+
+    <kendo-grid
+      [kendoGridBinding]="gridData"
+      [pageable]="true"
+      [sortable]="true"
+      [filterable]="true"
+      [groupable]="true"
+    >
+      <kendo-grid-column title="SrNo." [width]="80">
+        <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+          {{ rowIndex + 1 }}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="name" title="Student Name"></kendo-grid-column>
+      <kendo-grid-column field="marks" title="Marks"></kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>

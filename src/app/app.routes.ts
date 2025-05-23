@@ -26,6 +26,7 @@ import { StackedChartComponent } from './AmCharts/stacked-chart/stacked-chart.co
 import { PieChartsComponent } from './AmCharts/pie-charts/pie-charts.component';
 import { SankeyComponent } from '@progress/kendo-angular-charts';
 import { SankeyChartComponent } from './AmCharts/sankey-chart/sankey-chart.component';
+import { StudentBarComponent } from './AmCharts/student-bar/student-bar.component';
 
 
 export const routes: Routes = [
@@ -134,6 +135,10 @@ export const routes: Routes = [
     {
         path:'SankeyChart',
         component:SankeyChartComponent
+    },
+    {
+        path:"StudentBar",
+        component:StudentBarComponent
     }
 ];
 

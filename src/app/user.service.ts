@@ -187,4 +187,8 @@ getSankeychart():Observable<any>{
 getColumnLine():Observable<any>{
   return this.http.get(`http://localhost:5244/api/Trees/ColumnLine`)
 }
+
+getStudentData():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/GetStudents`)
+}
   }
