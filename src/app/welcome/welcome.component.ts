@@ -98,6 +98,9 @@ sankeyChart(){
 StudentBar(){
   this.router.navigate(['/StudentBar'])
 }
+FlyerWithUserInfo(){
+  this.router.navigate(['/FlyerEditUserInfo'])
+}
 
 OnLogout() {
   localStorage.clear();

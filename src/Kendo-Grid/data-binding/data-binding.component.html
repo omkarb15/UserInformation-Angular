@@ -139,6 +139,12 @@
     <button kendoGridCancelCommand>Cancel</button>
   </ng-template>
 </kendo-grid-command-column>
+<kendo-grid-column title="Action" [width]="20">
+  <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+    <button class="btn btn-success" (click)="showflyer(dataItem)">Details</button>
+  </ng-template>
+
+</kendo-grid-column>
 
   
   
@@ -169,7 +175,22 @@
     </button>
   </kendo-dialog-actions>
 </kendo-dialog>
-  
+
+<div class="side-panel" *ngIf="selecteduser">
+  <div class="panel-header">
+    <h3>User Details</h3>
+    <button (click)="closeFlyer()">X</button>
+  </div>
+  <div class="flyer-content">
+    <p><strong>First Name:</strong> {{ selecteduser.firstName }}</p>
+    <p><strong>Sur Name:</strong> {{ selecteduser.surName }}</p>
+    <p><strong>DOB:</strong> {{ selecteduser.dob | date: 'mediumDate' }}</p>
+    <p><strong>Gender:</strong> {{ selecteduser.gender }}</p>
+    <p><strong>Email:</strong> {{ selecteduser.emialId }}</p>
+    <p><strong>User Name:</strong> {{ selecteduser.userName }}</p>
+    <p><strong>Hobbies:</strong> {{ getHobbyNames(selecteduser.hobbyId) }}</p>
+  </div>
+</div>
 
 </div>
 

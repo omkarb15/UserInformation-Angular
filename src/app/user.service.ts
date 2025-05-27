@@ -191,4 +191,8 @@ getColumnLine():Observable<any>{
 getStudentData():Observable<any>{
   return this.http.get(`http://localhost:5244/api/Trees/GetStudents`)
 }
+
+getStudentBucket():Observable<any>{
+  return this.http.get(`http://localhost:5244/api/Trees/GetStudentBuckets`)
+}
   }

@@ -90,7 +90,16 @@ getAssetData() {
   
   });
 }
+getHobbyNames(hobbyIds: string): string {
+  if (!hobbyIds) return '';
+  
+  const idsArray = hobbyIds.split(',');
+  const names = this.hobbyOptions
+    .filter(opt => idsArray.includes(opt.value))
+    .map(opt => opt.text);
 
+  return names.join(', ');
+}
 public state: DataStateChangeEvent = {
   skip: 0,
   take: 5,
@@ -211,6 +220,14 @@ private formatDateForBackend(date: Date): string {
   return `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}.0000000`;
 }
 
+public selecteduser:any=null
+showflyer(user:any){
+  this.selecteduser=user
+
+}
+closeFlyer(){
+  this.selecteduser=null
+}
 
 OnLogout() {
   localStorage.clear();

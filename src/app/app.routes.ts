@@ -27,6 +27,7 @@ import { PieChartsComponent } from './AmCharts/pie-charts/pie-charts.component';
 import { SankeyComponent } from '@progress/kendo-angular-charts';
 import { SankeyChartComponent } from './AmCharts/sankey-chart/sankey-chart.component';
 import { StudentBarComponent } from './AmCharts/student-bar/student-bar.component';
+import { UserInfoWithFlyerComponent } from './user-info-with-flyer/user-info-with-flyer.component';
 
 
 export const routes: Routes = [
@@ -139,6 +140,10 @@ export const routes: Routes = [
     {
         path:"StudentBar",
         component:StudentBarComponent
+    },
+    {
+        path:"FlyerEditUserInfo",
+        component:UserInfoWithFlyerComponent
     }
 ];
 

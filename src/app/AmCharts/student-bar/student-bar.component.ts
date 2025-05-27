@@ -10,7 +10,7 @@ import { count } from 'rxjs';
 
 @Component({
   selector: 'app-student-bar',
-  imports: [KENDO_GRID],
+  imports: [KENDO_GRID , GridModule],
   templateUrl: './student-bar.component.html',
   styleUrl: './student-bar.component.css'
 })
@@ -28,10 +28,19 @@ export class StudentBarComponent implements OnInit {
         console.log("Student Data", data)
         this.allStudents=data
         this.gridData=data
-        const bucketData=this.createBucket()
-        this.CreateChart(bucketData)
+
+        
       }
     })
+ 
+    this.userservice.getStudentBucket().subscribe({
+      next:(Bucket:any)=>{
+        console.log("StudentBucketData", Bucket)
+        this.CreateChart(Bucket)
+
+      }
+    })
+ 
 
   }
 
@@ -67,7 +76,11 @@ export class StudentBarComponent implements OnInit {
   const yAxis=chart.yAxes.push(am5xy.ValueAxis.new(root,{
     renderer:am5xy.AxisRendererY.new(root,{
       strokeOpacity:0.1
-    })
+    }),
+    min:0,             //Ensures the Y-axis starts at 0.
+    numberFormat:"#",  // Ensures no decimal places (whole numbers only).
+    strictMinMax:true,  // Prevents automatic scaling to decimal ranges.
+    maxPrecision:0       //revents showing floating-point values.
   }))
 
   const legend=chart.children.push(am5.Legend.new(root,{
@@ -104,35 +117,38 @@ series.columns.template.events.on("click", (ev) => {
   const min = Number(minStr);
   const max = Number(maxStr);
 
-  this.gridData = this.allStudents.filter(student => student.marks >= min && student.marks < max);
+  this.gridData = this.allStudents.filter(student => student.marks >= min && student.marks <= max);
 });
 
   
  chart.appear(1000,100)
   }
-  createBucket(){
-    debugger
-    const buckets=[
-      {category:"0-35", count:0, range:[0,35]},
-      {category:"35-60", count:0, range:[35,60]},
-      {category:"60-80", count:0, range:[60,80]},
-      {category:"80-100", count:0, range:[80,100]},
-    ]
-    for (const student of this.allStudents){
-      for(const bucket of buckets ){
-        if(student.marks>=bucket.range[0]&& student.marks<bucket.range[1]){
-          bucket.count++
-          break
-        }
-      }
-    }
-    return buckets
-  }
-resetGrid() {
+  resetGrid() {
 this.gridData = this.allStudents;
 }
+public buttonCount = 2;
+public sizes = [10, 20, 50];
 
 naviagtetoWelcome(){
   this.router.navigate(['/Welcome'])
 }
 }
+  // createBucket(){
+  //   debugger
+  //   const buckets=[
+  //     {category:"0-35", count:0, range:[0,35]},
+  //     {category:"36-60", count:0, range:[36,60]},
+  //     {category:"61-80", count:0, range:[61,80]},
+  //     {category:"81-100", count:0, range:[81,100]},
+  //   ]
+  //   for (const student of this.allStudents){
+  //     for(const bucket of buckets ){
+  //       if(student.marks>=bucket.range[0]&& student.marks<=bucket.range[1]){
+  //         bucket.count++
+  //         break
+  //       }
+  //     }
+  //   }
+  //   return buckets
+  // }
+
