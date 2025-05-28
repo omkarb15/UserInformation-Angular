@@ -16,9 +16,10 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Keys } from '@progress/kendo-angular-common';
 import { fileExcelIcon, filePdfIcon, SVGIcon } from '@progress/kendo-svg-icons';
 import { LoaderModule, LoaderType } from '@progress/kendo-angular-indicators';
+import { UserFormComponent } from "../../app/user-form/user-form.component";
 @Component({
   selector: 'app-data-binding',
-  imports: [KENDO_GRID, CommonModule,GridModule, KENDO_DROPDOWNLIST, FormsModule,LoaderModule, KENDO_DROPDOWNS,ReactiveFormsModule,KENDO_DIALOG],
+  imports: [KENDO_GRID, CommonModule, GridModule, KENDO_DROPDOWNLIST, FormsModule, LoaderModule, KENDO_DROPDOWNS, ReactiveFormsModule, KENDO_DIALOG, UserFormComponent],
   templateUrl: './data-binding.component.html',
   styleUrl: './data-binding.component.css'
 })
@@ -63,12 +64,14 @@ private createFormGroup(dataItem:any):FormGroup{
     userName:[dataItem.userName||'', Validators.required],
     passWord:[dataItem.passWord||'', Validators.required],
     // hobbyName:[dataItem.hobbyName|| []]
-    hobbyId:[dataItem.hobbyId]
+    hobbyId:[dataItem.hobbyId],
+    profileImage:[dataItem.profilImage]
+
     
 
 
   })
-}
+} 
 
 getAssetData() {
   this.loading=true
@@ -90,16 +93,21 @@ getAssetData() {
   
   });
 }
-getHobbyNames(hobbyIds: string): string {
-  if (!hobbyIds) return '';
-  
-  const idsArray = hobbyIds.split(',');
+getHobbyNames(hobbyIds: string | number[]): string {
+  if (!hobbyIds || (Array.isArray(hobbyIds) && hobbyIds.length === 0)) return '';
+
+  const idsArray = Array.isArray(hobbyIds)
+    ? hobbyIds.map(String)
+    : hobbyIds.split(',').map(id => id.trim());
+
   const names = this.hobbyOptions
-    .filter(opt => idsArray.includes(opt.value))
+    .filter(opt => idsArray.includes(String(opt.value)))
     .map(opt => opt.text);
 
   return names.join(', ');
 }
+
+
 public state: DataStateChangeEvent = {
   skip: 0,
   take: 5,
@@ -220,14 +228,65 @@ private formatDateForBackend(date: Date): string {
   return `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}.0000000`;
 }
 
+
+
 public selecteduser:any=null
 showflyer(user:any){
   this.selecteduser=user
 
+
 }
+
 closeFlyer(){
   this.selecteduser=null
 }
+
+userToEdit:any
+showEditDialog=false
+
+openEditDialog(user:any){
+  this.userToEdit=user
+  this.showEditDialog=true
+
+}
+closeDialog(){
+  this.showEditDialog=false
+  this.userToEdit=null
+}
+handleFormSubmitted() {
+  this.getAssetData();       
+  this.closeDialog();        
+}
+
+updateUserData(updatedUser: any) {
+  if (this.selecteduser && this.selecteduser.id === updatedUser.id) {
+    const normalizedHobbyId = typeof updatedUser.hobbyId === 'string'
+      ? updatedUser.hobbyId.split(',').map(Number)
+      : updatedUser.hobbyId;
+
+    this.selecteduser = {
+      ...this.selecteduser,
+      ...updatedUser,
+      hobbyId: normalizedHobbyId
+    };
+
+    console.log('Updated user received:', updatedUser);
+    console.log('Normalized hobbyId:', normalizedHobbyId);
+    console.log('Selected user after update:', this.selecteduser);
+  }
+}
+
+handleUserDeleted(deletedUserId: number) {
+  this.getAssetData();
+
+  if (this.selecteduser && this.selecteduser.id === deletedUserId) {
+    this.closeFlyer();
+  }
+
+
+  this.closeDialog();
+}
+
 
 OnLogout() {
   localStorage.clear();

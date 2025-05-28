@@ -179,9 +179,13 @@
 <div class="side-panel" *ngIf="selecteduser">
   <div class="panel-header">
     <h3>User Details</h3>
-    <button (click)="closeFlyer()">X</button>
+     <button class="btn btn-danger"  (click)="openEditDialog(selecteduser)">Edit</button>
+    <button class="btn btn-success"(click)="closeFlyer()">Back</button>
+  
   </div>
   <div class="flyer-content">
+<img [src]="selecteduser.profilImage" width="100" height="100" alt="User Image">
+
     <p><strong>First Name:</strong> {{ selecteduser.firstName }}</p>
     <p><strong>Sur Name:</strong> {{ selecteduser.surName }}</p>
     <p><strong>DOB:</strong> {{ selecteduser.dob | date: 'mediumDate' }}</p>
@@ -191,6 +195,12 @@
     <p><strong>Hobbies:</strong> {{ getHobbyNames(selecteduser.hobbyId) }}</p>
   </div>
 </div>
+<kendo-dialog *ngIf="showEditDialog" title="Edit User Information" (close)="closeDialog()">
+ <div style="max-height: 80vh; overflow-y: auto;">
+    <app-user-form [user]="userToEdit" (formSubmitted)="handleFormSubmitted()" (userUpdated)="updateUserData($event)"  (deleteUSer)="handleUserDeleted($event)"></app-user-form>
+  </div>
+
+</kendo-dialog>
 
 </div>
 
